@@ -42,4 +42,4 @@ jobs:
           -Dsonar.organization=itt-architecture
           -Dsonar.javascript.lcov.reportPaths=./coverage/lcov.info
           -Dsonar.exclusions=coverage/**
-          -Dsonar.coverage.exclusions=server/database/**, server/model/**, server/routes/**, server/services/**
+          -Dsonar.coverage.exclusions=server/database/**,server/model/**,server/routes/**,server/services/**
