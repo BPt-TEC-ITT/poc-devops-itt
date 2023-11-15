@@ -130,4 +130,49 @@ describe('User Operations', function() {
     
         // Add other test cases for handling errors while deleting user and other scenarios
     });
+    describe('Update User', function() {
+        it('should handle not finding a user to update', function() {
+            const req = {
+                params: {
+                    id: '57289729587'
+                },
+                body: {
+                    name: 'Lionel Messi'
+                }
+            };
+            const res = {
+                status: function(code) {
+                    assert.strictEqual(code, 404);
+                    return this;
+                }
+            };
+    
+            const findByIdAndUpdateStub = sinon.stub(Userdb, 'findByIdAndUpdate');
+            findByIdAndUpdateStub.resolves(null); // Simulating user not found
+    
+            update(req, res);
+    
+            sinon.assert.calledOnce(findByIdAndUpdateStub);
+            findByIdAndUpdateStub.restore();
+        });
+        it('should handle empty update data', function() {
+            const req = {
+                params: {
+                    id: 'user_id_here' // Use an existing user ID
+                },
+                body: {} // Empty update data
+            };
+            const res = {
+                send: function(data) {
+                    assert.deepStrictEqual(data, { message: 'Data to update can not be empty' });
+                },
+                status: function(code) {
+                    assert.strictEqual(code, 400);
+                    return this;
+                }
+            };
+    
+            update(req, res);
+        });
+    });
 });
