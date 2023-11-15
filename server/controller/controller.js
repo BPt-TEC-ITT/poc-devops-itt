@@ -1,4 +1,4 @@
-var Userdb = require('../model/model')
+const Userdb = require('../model/model')
 
 //create and same new user
 exports.create = (req,res) =>{
@@ -87,10 +87,6 @@ exports.delete =(req,res)=>{
         .then(data=>{
             if(!data){
                 res.status(404).send({message:`Cannot delete with id ${id}. Maybe id is wrong`})
-            }else{
-                res.send({
-                    message:"User was deleted successfully!"
-                })
             }
         })
         .catch(err=>{
