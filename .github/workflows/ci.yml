@@ -25,7 +25,7 @@ jobs:
         cache: 'npm'
     - run: npm install
     - name: Run Tests
-    - run: npm test
+      run: npm test
     - name: Sonar Analysis
       # You can pin the exact commit or the version.
       # uses: SonarSource/sonarcloud-github-action@de2e56b42aa84d0b1c5b622644ac17e505c9a049
