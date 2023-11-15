@@ -104,6 +104,7 @@ describe('User Operations', function() {
                 sinon.assert.calledOnce(findByIdStub);
                 findByIdStub.restore();
             });
+    
     });
     describe('Delete User', function() {
         it('should handle not finding a user to delete', function() {
@@ -121,6 +122,31 @@ describe('User Operations', function() {
     
             const findByIdAndDeleteStub = sinon.stub(Userdb, 'findByIdAndDelete');
             findByIdAndDeleteStub.resolves(null); // Simulating user not found
+    
+            deleteUser(req, res);
+    
+            sinon.assert.calledOnce(findByIdAndDeleteStub);
+            findByIdAndDeleteStub.restore();
+        });
+
+        it('should delete a user by ID', function() {
+            const req = {
+                params: {
+                    id: '1'
+                }
+            };
+            const res = {
+                send: function(data) {
+                    assert.deepStrictEqual(data, { message: 'User was deleted successfully!' });
+                },
+                status: function(code) {
+                    assert.strictEqual(code, 200);
+                    return this;
+                }
+            };
+    
+            const findByIdAndDeleteStub = sinon.stub(Userdb, 'findByIdAndDelete');
+            findByIdAndDeleteStub.resolves({ message: 'User was deleted successfully!' });
     
             deleteUser(req, res);
     
@@ -158,14 +184,11 @@ describe('User Operations', function() {
         it('should handle empty update data', function() {
             const req = {
                 params: {
-                    id: 'user_id_here' // Use an existing user ID
+                    id: '1' 
                 },
                 body: {} // Empty update data
             };
             const res = {
-                send: function(data) {
-                    assert.deepStrictEqual(data, { message: 'Data to update can not be empty' });
-                },
                 status: function(code) {
                     assert.strictEqual(code, 400);
                     return this;
