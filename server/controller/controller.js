@@ -4,7 +4,7 @@ var Userdb = require('../model/model')
 exports.create = (req,res) =>{
     //validate request
     if(!req.body){
-        res.status(400).send({message: " Content can not be empty!"})
+        res.status(400)
         return; 
     }
 
@@ -24,10 +24,7 @@ exports.create = (req,res) =>{
             res.redirect('/add-user')
         })
         .catch(err=>{
-            res.status(500).send({
-                message:err.message ||"Some error occured while creating a create operation"
-                  
-            })
+            res.status(500)
         })
     
 
