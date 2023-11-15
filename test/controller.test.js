@@ -104,6 +104,27 @@ describe('User Operations', function() {
                 sinon.assert.calledOnce(findByIdStub);
                 findByIdStub.restore();
             });
+
+            it('should handle errors while finding all users', function() {
+                const req = {
+                    query: {}
+                }
+                const res = {
+                    status: function(code) {
+                        assert.strictEqual(code, 500);
+                        return this;
+                    }
+                };
+        
+                const findStub = sinon.stub(Userdb, 'find');
+                findStub.rejects(new Error('Error')); // Simulating a database error
+        
+                find(req, res);
+        
+                sinon.assert.calledOnce(findStub);
+                findStub.restore();
+            });
+
     
     });
     describe('Delete User', function() {
