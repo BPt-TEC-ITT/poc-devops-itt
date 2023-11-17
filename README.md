@@ -1,7 +1,7 @@
 ## DevOps Tools Demo
 
 ### CI/CD Pipeline
-[![CI](https://github.com/martinmouly/poc-devops-itt/actions/workflows/ci.yml/badge.svg)](https://github.com/martinmouly/poc-devops-itt/actions/workflows/ci.yml)
+[![ci/cd pipeline](https://github.com/martinmouly/poc-devops-itt/actions/workflows/main.yml/badge.svg)](https://github.com/martinmouly/poc-devops-itt/actions/workflows/main.yml)
 
 ### SonarQube 
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=martinmouly_poc-devops-itt&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=martinmouly_poc-devops-itt)
