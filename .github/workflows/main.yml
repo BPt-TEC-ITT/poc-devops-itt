@@ -1,7 +1,7 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 
-name: CI
+name: ci/cd pipeline
 
 on:
   push:
@@ -10,23 +10,23 @@ on:
     branches: [ "v1.0/main" ]
 
 jobs:
-  pipeline:
-    name: Run CI Pipeline
+  build:
+    name: build project
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [14.x]
     steps:
     - uses: actions/checkout@v3
-    - name: Build
+    - name: install dependencies
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm install
-    - name: Run Tests
+    - name: run tests
       run: npm test
-    - name: Sonar Analysis
+    - name: run sonar scan
       # You can pin the exact commit or the version.
       # uses: SonarSource/sonarcloud-github-action@de2e56b42aa84d0b1c5b622644ac17e505c9a049
       uses: SonarSource/sonarcloud-github-action@de2e56b42aa84d0b1c5b622644ac17e505c9a049
