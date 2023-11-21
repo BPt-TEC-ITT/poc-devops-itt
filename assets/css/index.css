@@ -27,6 +27,7 @@ a {
 .nav-brand{
     font-size: 1.5em;
     font-weight: bold;
+    color: white;
 }
 
 .d-flex{
@@ -73,7 +74,7 @@ a {
 }
 
 #site-main{
-    margin-top: 6em;
+    margin-top: 2.25em;
     font-family: 'Barlow', sans-serif;
 }
 
@@ -96,6 +97,7 @@ table{
     vertical-align: top;
     text-align: center;
     border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
 }
 
 .table td > a.btn{
@@ -105,7 +107,7 @@ table{
 }
 
 .table tr:hover{
-    background-color:#06d6a0 ;
+    background-color:#f0f0f0 ;
 }
 
 .table tr:hover td > a{
@@ -140,11 +142,11 @@ table{
 
 /*  add user & update user template */
 .form-title{
-    margin-top: 2em;
+    margin-top: 0.5em;
 }
 
 .form-title > h2{
-    padding: .5em 0;
+    padding: .1em 0;
 }
 
 .new_user{
@@ -230,6 +232,22 @@ table{
 
 #update_user .form-group .btn:hover,
 #add_user .form-group .btn:hover{
-    background-color: var(--dark);
-    color: var(--border);
+    background-color: #119e78;
+    color: white;
 }
+
+a.delete:hover {
+    background-color: rgb(229, 89, 114);
+    color: white;
+}
+
+a.update:hover {
+    background-color: rgb(243, 211, 87);
+    color: white;
+}
+
+a.add-user:hover {
+    background-color: #6ae0b5;
+    text-decoration: none;
+}
+

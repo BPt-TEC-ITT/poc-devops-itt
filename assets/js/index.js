@@ -1,7 +1,11 @@
 
 $("#add_user").submit(function(event){
-    alert('Data Inserted Successfully!')
-})
+    $.ajax(request).done(function(response){
+        alert("Data Inserted Successfully!");
+    })
+    window.location.href = "/";
+}
+)
 
 $("#update_user").submit(function(event){
     event.preventDefault();
@@ -23,7 +27,8 @@ $("#update_user").submit(function(event){
     $.ajax(request).done(function(response){
         alert("Data Updated Successfully!");
     })
-
+    
+    window.location.href = "/";
 })
 
 
@@ -40,8 +45,8 @@ if(window.location.pathname == "/"){
         if(confirm("Do you really want to delete this record?")){
             $.ajax(request).done(function(response){
                 alert("Data Deleted Successfully!");
-                location.reload();
             })
+            window.location.reload();
         }
 
     })
