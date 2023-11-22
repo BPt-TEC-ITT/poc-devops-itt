@@ -54,6 +54,6 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'poc-devops-rec'
-          slot-name: 'Recette'
+          slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_0FF13361837D4CC3A4A64CE3895D7471 }}
           package: .
