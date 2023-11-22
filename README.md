@@ -1,10 +1,11 @@
-## DevOps Tools Demo
+## DevOps Tools Demo  
+[![build](https://github.com/martinmouly/poc-devops-itt/actions/workflows/build.yml/badge.svg)](https://github.com/martinmouly/poc-devops-itt/actions/workflows/build.yml)
+[![deploy](https://github.com/martinmouly/poc-devops-itt/actions/workflows/deploy.yml/badge.svg)](https://github.com/martinmouly/poc-devops-itt/actions/workflows/deploy.yml)
 
-### CI/CD Pipeline
-[![ci/cd pipeline](https://github.com/martinmouly/poc-devops-itt/actions/workflows/main.yml/badge.svg)](https://github.com/martinmouly/poc-devops-itt/actions/workflows/main.yml)
 
-### SonarQube 
-[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=martinmouly_poc-devops-itt&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=martinmouly_poc-devops-itt)
+
+
+
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=martinmouly_poc-devops-itt&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=martinmouly_poc-devops-itt)
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=martinmouly_poc-devops-itt&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=martinmouly_poc-devops-itt)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=martinmouly_poc-devops-itt&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=martinmouly_poc-devops-itt)
