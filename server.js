@@ -3,6 +3,7 @@ const dotenv = require('dotenv')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const path = require('path')
+const CONFIG = require('./config/config.json');
 
 const connectDB = require('./server/database/connection')
 
@@ -36,7 +37,7 @@ app.use('/js',express.static(path.resolve(__dirname,"assets/js")))
 app.use('/',require('./server/routes/router'))
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+  console.log(`Example app listening at ${CONFIG.HOST_URL}`)
 })
 
 
