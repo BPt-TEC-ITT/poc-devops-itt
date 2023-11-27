@@ -2,7 +2,7 @@ name: build
 
 on:
   pull_request:
-    branches: [ "v1.1/main" ]
+    branches: [ "v1.2/main" ]
 
 jobs:
   build:
