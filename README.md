@@ -1,6 +1,6 @@
 ## DevOps Tools Demo  
 [![build](https://github.com/martinmouly/poc-devops-itt/actions/workflows/build.yml/badge.svg)](https://github.com/martinmouly/poc-devops-itt/actions/workflows/build.yml)
-[![deploy](https://github.com/martinmouly/poc-devops-itt/actions/workflows/deploy.yml/badge.svg)](https://github.com/martinmouly/poc-devops-itt/actions/workflows/deploy.yml)
+[![deploy](https://github.com/martinmouly/poc-devops-itt/actions/workflows/deploy-to-prod.yml/badge.svg)](https://github.com/martinmouly/poc-devops-itt/actions/workflows/deploy-to-prod.yml)
 
 
 
