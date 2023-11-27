@@ -1,5 +1,5 @@
 // For local development, comment the line below and uncomment the following one
-var host_url = "https://poc-devops.azurewebsites.net";
+var host_url = "https://poc-devops-archi.azurewebsites.net";
 // var host_url = "http://localhost:3000";
 
 
