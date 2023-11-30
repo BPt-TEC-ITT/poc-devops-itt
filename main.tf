@@ -28,7 +28,7 @@ resource "azurerm_linux_web_app" "terratest" {
   }
 
   app_settings = {
-      "MONGO_URI" = "mongodb+srv://admin:admin@cluster0.fyua0e1.mongodb.net/?retryWrites=true&w=majority"
+      "MONGO_URI" = "<mongo_uri>"
   }
 
 }
