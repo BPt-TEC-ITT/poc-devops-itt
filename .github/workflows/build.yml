@@ -38,5 +38,5 @@ jobs:
           -Dsonar.projectKey=martinmouly_poc-devops-itt
           -Dsonar.organization=itt-architecture
           -Dsonar.javascript.lcov.reportPaths=./coverage/lcov.info
-          -Dsonar.exclusions=coverage/**,server.js
+          -Dsonar.exclusions=coverage/**,server.js, main.tf
           -Dsonar.coverage.exclusions=server/database/connection.js,server/model/model.js,server/routes/router.js,server/services/render.js,test/**,assets/**
