@@ -10,22 +10,35 @@ jobs:
   build:
     name: build project
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [14.x]
     steps:
     - uses: actions/checkout@v3
     - name: install dependencies
       uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 14.x
         cache: 'npm'
     - run: npm install
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    name: execute tests
+    steps:
+    - uses: actions/checkout@v3
     - name: run tests
-      run: npm test
-    - name: run sonar scan
-      # You can pin the exact commit or the version.
-      # uses: SonarSource/sonarcloud-github-action@de2e56b42aa84d0b1c5b622644ac17e505c9a049
+      uses: actions/setup-node@v3
+      with:
+        node-version: 14.x
+        cache: 'npm'
+    - run: npm install
+    - run: npm test
+  sonar-scan:
+    needs: test
+    runs-on: ubuntu-latest
+    name: run sonar scan
+    # You can pin the exact commit or the version.
+    # uses: SonarSource/sonarcloud-github-action@de2e56b42aa84d0b1c5b622644ac17e505c9a049
+    steps:
+    - name: sonar analysis
       uses: SonarSource/sonarcloud-github-action@de2e56b42aa84d0b1c5b622644ac17e505c9a049
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information
@@ -40,3 +53,7 @@ jobs:
           -Dsonar.javascript.lcov.reportPaths=./coverage/lcov.info
           -Dsonar.exclusions=coverage/**,server.js,main.tf
           -Dsonar.coverage.exclusions=server/database/connection.js,server/model/model.js,server/routes/router.js,server/services/render.js,test/**,assets/**
+  
+      
+    
+    
