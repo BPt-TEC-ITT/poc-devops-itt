@@ -22,17 +22,3 @@ This project aims to demonstrate the common tools and best-practices around DevO
 
 The code stored in this repository is our mock web app. It's a simple CRUD web application allowing a user to create, read, update and delete users. The stack used for the web app is NodeJS Express with EJS, and we used MongoDB as our DBMS.
 
-### Local development
-
-For local development, change the host url in the config.json file in the config folder to : 
-```json
-{
-    "HOST_URL": "http://localhost:3000"
-}
-```
-
-And update the assets/js/index.js file :
-```javascript
-// For local development, comment the line below and uncomment the following one
-var host_url = "https://poc-devops-rec.azurewebsites.net";
-// var host_url = "http://localhost:3000";
