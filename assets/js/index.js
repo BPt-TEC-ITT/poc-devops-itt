@@ -1,7 +1,11 @@
-// For local development, comment the line below and uncomment the following one
-var host_url = "https://poc-devops-rec.azurewebsites.net";
-// var host_url = "http://localhost:3000";
+var host_url;
 
+if (window.location.hostname == "localhost") {
+    host_url = "http://localhost:3000";
+}
+else {
+    host_url = "https://poc-devops-rec.azurewebsites.net";
+}
 
 $("#add_user").submit(function(event){
     $.ajax(request).done(function(response){
