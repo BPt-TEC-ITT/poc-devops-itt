@@ -27,7 +27,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: run tests
-    - run: npm test
+      run: npm test
   sonar-scan:
     runs-on: ubuntu-latest
     name: run sonar scan
@@ -35,11 +35,11 @@ jobs:
     # uses: SonarSource/sonarcloud-github-action@de2e56b42aa84d0b1c5b622644ac17e505c9a049
     steps:
     - name: sonar analysis
-    - uses: SonarSource/sonarcloud-github-action@de2e56b42aa84d0b1c5b622644ac17e505c9a049
-    - env:
+      uses: SonarSource/sonarcloud-github-action@de2e56b42aa84d0b1c5b622644ac17e505c9a049
+      env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}   # Generate a token on Sonarcloud.io, add it to the secrets of this repo with the name SONAR_TOKEN (Settings > Secrets > Actions > add new repository secret)
-    - with:
+      with:
         # Additional arguments for the sonarcloud scanner
         args:
           # Unique keys of your project and organization. You can find them in SonarCloud > Information (bottom-left menu)
