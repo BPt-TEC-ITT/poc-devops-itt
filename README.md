@@ -22,3 +22,23 @@ This project aims to demonstrate the common tools and best-practices around DevO
 
 The code stored in this repository is our mock web app. It's a simple CRUD web application allowing a user to create, read, update and delete users. The stack used for the web app is NodeJS Express with EJS, and we used MongoDB as our DBMS.
 
+## For local development
+If you want to use this project to demonstrate DevOps tools and best-practices, or if you simply want to participate in the project's maintenance, you might need to start the project in a local environment.
+To start the project in a local environment : 
+- Create a .env file in the root folder and add these 2 variables :
+  ```
+  MONGO_URI="<mongo_uri>"
+  HOST_URL="http://localhost:3000"
+  ```
+  Ask Martin Mouly or Soulemanou Ngbango for the MONGO_URI variable. It containes the credentials to connect to the MongoDB database.
+
+- Once you've added the .env file, you're good to go, simply run these 2 commands to build the project and start the local server :
+  ```
+  npm install
+  ```
+  ```
+  npm start
+  ```
+
+Finally, go to http://localhost:3000 to visualize the app.
+
