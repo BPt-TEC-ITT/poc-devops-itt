@@ -5,6 +5,8 @@ name: deploy
 
 on:
   workflow_dispatch:
+  push:
+    branches: [ "v1.2/main" ]
 
 jobs:
   package:
