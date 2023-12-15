@@ -1,5 +1,6 @@
 const Userdb = require('../model/model')
 
+const mongo_password = "password"
 //create and same new user
 exports.create = (req,res) =>{
     //validate request
