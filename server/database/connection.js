@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
-const mongoPwd = "password1234";
+const mongoUri = "password1234";
 const connectDB = async () => {
     try{
         // mongodb connection string
-        const con = await mongoose.connect(process.env.MONGO_URI + mongoPwd, {
+        const con = await mongoose.connect(mongoUri, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useFindAndModify: false,
