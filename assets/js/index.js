@@ -1,4 +1,4 @@
-const host_url = "";
+let host_url = "";
 
 if (window.location.hostname == "localhost") {
     host_url = "http://localhost:3000";
