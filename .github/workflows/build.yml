@@ -18,6 +18,7 @@ jobs:
         node-version: 14.x
         cache: 'npm'
     - run: npm install
+    
   test:
     needs: build
     runs-on: ubuntu-latest
@@ -31,28 +32,33 @@ jobs:
         cache: 'npm'
     - run: npm install
     - run: npm test
-  sonar-scan:
-    needs: test
+    
+  sonarcloud:
+    name: SonarCloud
     runs-on: ubuntu-latest
-    name: run sonar scan
-    # You can pin the exact commit or the version.
-    # uses: SonarSource/sonarcloud-github-action@de2e56b42aa84d0b1c5b622644ac17e505c9a049
     steps:
-    - name: sonar analysis
-      uses: SonarSource/sonarcloud-github-action@de2e56b42aa84d0b1c5b622644ac17e505c9a049
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}   # Generate a token on Sonarcloud.io, add it to the secrets of this repo with the name SONAR_TOKEN (Settings > Secrets > Actions > add new repository secret)
-      with:
-        # Additional arguments for the sonarcloud scanner
-        args:
-          # Unique keys of your project and organization. You can find them in SonarCloud > Information (bottom-left menu)
-          # mandatory
-          -Dsonar.projectKey=martinmouly_poc-devops-itt
-          -Dsonar.organization=itt-architecture
-          -Dsonar.javascript.lcov.reportPaths=./coverage/lcov.info
-          -Dsonar.exclusions=coverage/**,server.js,main.tf
-          -Dsonar.coverage.exclusions=server/database/connection.js,server/model/model.js,server/routes/router.js,server/services/render.js,test/**,assets/**
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 
+      - name: Install dependencies
+        run: npm install
+      - name: Test and coverage
+        run: npm test
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}   # Generate a token on Sonarcloud.io, add it to the secrets of this repo with the name SONAR_TOKEN (Settings > Secrets > Actions > add new repository secret)
+        with:
+          # Additional arguments for the sonarcloud scanner
+          args:
+            # Unique keys of your project and organization. You can find them in SonarCloud > Information (bottom-left menu)
+            # mandatory
+            -Dsonar.projectKey=martinmouly_poc-devops-itt
+            -Dsonar.organization=itt-architecture
+            -Dsonar.javascript.lcov.reportPaths=./coverage/lcov.info
+            -Dsonar.exclusions=coverage/**,server.js,main.tf
+            -Dsonar.coverage.exclusions=server/database/connection.js,server/model/model.js,server/routes/router.js,server/services/render.js,test/**,assets/**
   
       
     
