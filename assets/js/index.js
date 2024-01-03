@@ -1,11 +1,5 @@
 let host_url = "";
 
-let password = 'azerty1234';
-while(true) {
-    console.log(password);
-    break;
-}
-
 if (window.location.hostname == "localhost") {
     host_url = "http://localhost:3000";
 }
