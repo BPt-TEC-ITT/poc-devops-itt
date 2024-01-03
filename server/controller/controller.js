@@ -8,11 +8,6 @@ exports.create = (req,res) =>{
         return; 
     }
 
-    if(!req.body){
-        res.status(400)
-        return; 
-    }
-
     //new user
     const user = new Userdb({
         name : req.body.name,

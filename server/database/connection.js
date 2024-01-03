@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
 
+const mongoPassword = "password123";
+
 const connectDB = async () => {
     try{
         // mongodb connection string
-        const con = await mongoose.connect(process.env.MONGO_URI, {
+        const con = await mongoose.connect(process.env.MONGO_URI + mongoPassword, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useFindAndModify: false,
