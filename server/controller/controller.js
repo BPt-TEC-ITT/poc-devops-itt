@@ -7,6 +7,10 @@ exports.create = (req,res) =>{
         res.status(400)
         return; 
     }
+    if(!req.body){
+        res.status(400)
+        return; 
+    }
 
     //new user
     const user = new Userdb({
