@@ -1,0 +1,28 @@
+name: Build docker image
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build_docker_image:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Login to docker registry
+      env: 
+        registry_token: ${{ secrets.REGISTRY_TOKEN }}
+      run: docker login -u sngbango -p $registry_token
+    - name: Create env file
+      working-directory: ./containerization/image-build
+      env:
+        MONGO_URI: ${{  secrets.MONGO_URI  }}
+        HOST_URL: ${{  secrets.HOST_URL  }}
+      run: |
+        touch .env
+        echo MONGO_URI=$MONGO_URI >> .env
+        echo HOST_URL=$HOST_URL >> .env
+    - name: Build docker image
+      working-directory: ./containerization/image-build
+      run: docker build . --tag sngbango/app-poc:latest
+    - name: Push images
+      run: docker push sngbango/app-poc:latest
