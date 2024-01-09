@@ -23,7 +23,7 @@ jobs:
         echo HOST_URL=$HOST_URL >> .env
     - name: Build docker image
       working-directory: ./containerization/image-build
-      run: docker build . --tag sngbango/app-poc:latest
+      run: docker build . --tag martinmouly/poc-devops-itt:latest
     - name: Push images
       run: docker push martinmouly/poc-devops-itt:latest
 
