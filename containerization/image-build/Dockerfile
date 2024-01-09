@@ -5,7 +5,7 @@ FROM node:14
 WORKDIR /usr/scr/app
 
 # Clone the repository
-RUN git clone https://github.com/martinmouly/poc-devops-itt.git .
+RUN git clone https://github.com/BPt-TEC-ITT/poc-devops-itt.git .
 
 # Copy .env file that contains parameters into the container
 COPY .env .env
