@@ -25,4 +25,5 @@ jobs:
       working-directory: ./containerization/image-build
       run: docker build . --tag sngbango/app-poc:latest
     - name: Push images
-      run: docker push sngbango/app-poc:latest
+      run: docker push martinmouly/poc-devops-itt:latest
+
