@@ -26,7 +26,7 @@ The code stored in this repository is our mock web app. It's a simple CRUD web a
 ### Descritpion du repo
 
 - La **racine de repo** contient le code de l'application à dépoyer
-- Le dossier **Containerization** : contient Terraform création de ressource sur Azure
+- Le dossier **Containerization** : contient le code Terraform création de ressources sur Azure
 - Le dossier **.gihub/workflows** : contien les workflows qui permettent d'automatiser certaines actions
   - **build.yml** : build l'application et faire passer tests d'intégration et de qualité de code
   - **build-image.yml** : Construire une image docker et la déposer dans un registre de conteneur
