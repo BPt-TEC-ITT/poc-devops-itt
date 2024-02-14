@@ -2,6 +2,10 @@ name: Build docker image
 
 on:
   workflow_dispatch:
+    inputs:
+      version:
+        description: 'image version to build (ex: 0.0)'
+        required: true
 
 jobs:
   build_docker_image:
@@ -23,7 +27,7 @@ jobs:
         echo HOST_URL=$HOST_URL >> .env
     - name: Build docker image
       working-directory: ./containerization/image-build
-      run: docker build . --tag martinmouly/poc-devops-itt:latest
+      run: docker build . --tag martinmouly/poc-devops-itt:${{  github.event.inputs.version  }}
     - name: Push images
-      run: docker push martinmouly/poc-devops-itt:latest
+      run: docker push martinmouly/poc-devops-itt:${{  github.event.inputs.version  }}
 
