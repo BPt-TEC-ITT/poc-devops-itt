@@ -1,0 +1,44 @@
+
+name: POC initialization
+
+on:
+    workflow_dispatch:
+
+env:
+  ARM_CLIENT_SECRET: ${{  secrets.ARM_CLIENT_SECRET  }}
+  ARM_SUBSCRIPTION_ID: ${{  secrets.ARM_SUBSCRIPTION_ID  }}
+  ARM_TENANT_ID: ${{  secrets.ARM_TENANT_ID  }}
+  ARM_CLIENT_ID: ${{  secrets.ARM_CLIENT_ID  }}
+
+jobs:
+  
+  deploy_on_azure_container_service:
+
+    runs-on: ubuntu-latest
+
+    steps:
+        - uses: actions/checkout@v3
+    
+        - name: configure client secret
+          run: export ARM_CLIENT_SECRET=$ARM_CLIENT_SECRET
+        
+        - name: configure subscription id
+          run: export ARM_SUBSCRIPTION_ID=$ARM_SUBSCRIPTION_ID
+        
+        - name: configure tenant id
+          run: export ARM_TENANT_ID=$ARM_TENANT_ID
+    
+        - name: configure client id
+          run: export ARM_CLIENT_ID=$ARM_CLIENT_ID
+    
+        - name: Initialize Terraform
+          working-directory: ./containerization/infrastructure/remote-backend
+          run: terraform init
+    
+        - name: terraform plan
+          working-directory: ./containerization/infrastructure/remote-backend
+          run: terraform plan
+
+        - name: terraform apply
+          working-directory: ./containerization/infrastructure/remote-backend
+          run: terraform apply -var -auto-approve

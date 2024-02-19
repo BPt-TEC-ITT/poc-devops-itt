@@ -17,8 +17,8 @@ resource "random_string" "resource_code" {
   upper   = false
 }
 
-resource "azurerm_resource_group" "tfstate" {
-  name     = "tfstate"
+resource "azurerm_resource_group" "POC-ITT-tfstate" {
+  name     = "POCITT-Initialization"
   location = "East US"
 }
 
@@ -30,9 +30,6 @@ resource "azurerm_storage_account" "tfstate" {
   account_replication_type = "LRS"
   allow_nested_items_to_be_public = false
 
-  tags = {
-    environment = "staging"
-  }
 }
 
 resource "azurerm_storage_container" "tfstate" {

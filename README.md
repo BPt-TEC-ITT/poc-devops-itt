@@ -34,7 +34,8 @@ The code stored in this repository is our mock web app. It's a simple CRUD web a
 
 ### Prérequis
 
-- Avoir un compte utilisateur Azure (Contibutor role)
+- Avoir à minima le rôle Colabarateur sur le projet git : afin de pourvoir accéder à l'onglet "action" pour lancer les pipelines
+- Avoir un compte utilisateur Azure (Contibutor role) : pour accéder au portail Azure et accéder aux ressources qui seront créées par les pipeline
 - Avoir un accès programmatic à Azure (Azure principal) : cet acces sera utilisé par Terraform pour gérer automatiquement les ressoures Azure via le pipeline Github Action.
 Pour plus d'information, voir la [Documentation d'Azure](https://learn.microsoft.com/en-us/azure/developer/terraform/authenticate-to-azure?tabs=bash#create-a-service-principal)
 
@@ -97,9 +98,13 @@ L'exécution du pipeline déploiera la version sélectionnée (0.1 dans notre ex
 
 Cette étape permet de construire une image de conteneur de l'application prenant en compte les dernières modifications faites sur la branche principale. Cette image sera stocké dans un registre de conteneur [ici](https://hub.docker.com/r/sngbango/app-poc/tags).
 
+
+
 #### Comment lancer le workflow ?
 
-Dans l'onglet "**Action**" du repo git, lancer le workflow **Build docker image**
+Dans l'onglet "**Action**" du repo git, lancer le workflow **Build docker image** en specifiant en paramètre la version de l'image qui va être déployée
+
+Note: vous devrez spécifier la même version aux étapes **DEPLOY (test et build)**. Assurez vous que l'image de conteneur a bien été créée ([registre de conteneur](https://hub.docker.com/r/sngbango/app-poc/tags))
 
 ![plot](./images/Docker-build-workflow.png)
 
@@ -116,7 +121,7 @@ Cette étape permet de déployer la dernière version de l'application en enviro
 Dans l'onglet "**Action**" du repo git, lancer le workflow **Azure container deployment** avec les paramètres :
 
 - Deployment environment : **test**
-- Application version : **latest**
+- Application version : *la même version que celle spécifiée à l'étape "BUILD" (exemple: 1.0)*
 
 A la fin de l'exécution du workflow, vous pouvez vérifier que la dernière version de l'application a bien été dépoyée en [TEST](http://test-itt-poc-devops.eastus.azurecontainer.io:3000/) : <http://test-itt-poc-devops.eastus.azurecontainer.io:3000/>
 
@@ -133,8 +138,7 @@ Cette étape permet de déployer la dernière version de l'application en enviro
 Dans l'onglet "**Action**" du repo git, lancer le workflow **Azure container deployment** avec les paramètres :
 
 - Deployment environment : **prod**
-- Application version : **latest**
-
+- Application version : *la même version que celle spécifiée à l'étape "BUILD" (exemple: 1.0)*
 A la fin de l'exécution du workflow, vous pouvez vérifier que la dernière version de l'application a bien été dépoyée en [PROD](http://prod-itt-poc-devops.eastus.azurecontainer.io:3000/) : <http://prod-itt-poc-devops.eastus.azurecontainer.io:3000/>
 
 ![plot](./images/latest-prod-depoyment.png)
