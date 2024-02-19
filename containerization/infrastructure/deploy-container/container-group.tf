@@ -1,8 +1,8 @@
 resource "azurerm_container_group" "container-poc-prod" {
-  name                = "prod-poc-container-group"
+  name                = "prod-container-group"
   location            = azurerm_resource_group.rg-container-prod.location
   resource_group_name = azurerm_resource_group.rg-container-prod.name
-  dns_name_label      = "prod-itt-poc-devops"
+  dns_name_label      = "prod-poc-devops"
   os_type             = "Linux"
 
   container {
@@ -22,10 +22,10 @@ resource "azurerm_container_group" "container-poc-prod" {
 }
 
 resource "azurerm_container_group" "container-poc-test" {
-  name                = "test-poc-container-group"
+  name                = "test-container-group"
   location            = azurerm_resource_group.rg-container-test.location
   resource_group_name = azurerm_resource_group.rg-container-test.name
-  dns_name_label      = "test-itt-poc-devops"
+  dns_name_label      = "test-poc-devops"
   os_type             = "Linux"
 
   container {
