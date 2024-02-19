@@ -23,7 +23,7 @@ resource "azurerm_resource_group" "POC-ITT-tfstate" {
 }
 
 resource "azurerm_storage_account" "tfstate" {
-  name                     = "tfstate${random_string.resource_code.result}"
+  name                     = "tfstate-sa"
   resource_group_name      = azurerm_resource_group.POC-ITT-tfstate.name
   location                 = azurerm_resource_group.POC-ITT-tfstate.location
   account_tier             = "Standard"

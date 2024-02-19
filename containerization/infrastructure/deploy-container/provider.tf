@@ -8,9 +8,9 @@ terraform {
 
   #Before use remote backend you have to create a storage account and storage container on azure
   backend "azurerm" {
-    resource_group_name  = "poc-ressource-group"
-    storage_account_name = "tfstatepocdevopsitt"
-    container_name       = "tfstatetest"
+    resource_group_name  = "POCITT-Initialization"
+    storage_account_name = "tfstatefhjm1"
+    container_name       = "tfstate"
     key                  = "terraform.tfstate"
   }
 
