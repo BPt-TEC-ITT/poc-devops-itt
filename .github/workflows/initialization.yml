@@ -41,4 +41,4 @@ jobs:
 
         - name: terraform apply
           working-directory: ./containerization/infrastructure/remote-backend
-          run: terraform apply -var -auto-approve
+          run: terraform apply -auto-approve
