@@ -83,18 +83,28 @@ Le board est déjà pré-configuré et le ticket sur lequel on va faire la démo
   
 <img width="837" alt="image" src="https://github.com/BPt-TEC-ITT/poc-devops-itt/assets/19230666/5efac84e-faba-4330-82f2-a76ff5c05e58">    
   
-### 2 - CODE
+### 2 - CODE, BUILD, TEST
 
-TO DO
+Cette étape consiste à effectuer le dev. 
+- En local : Voir les instructions en bas pour le dev en local. Créer une branche avec nom spécifique au dev, effectuer le dev dans cette branche, puis pousser la branche sur le remote.
+- Directement sur GitHub : Faire le dev directement dans le fichier correspondant, commit les changements en créant une nouvelle branche
 
-### 3 - TEST
+Quand le dev a été fait sur la branche, ouvrir une pull request, ce qui va lancer un pipeline de build + test. (On peut alors passer le ticket dans la colonne 'Sent for PR' dans le dashboard).   
+Si le pipeline fail, le bouton pour merger sera rouge (à ne pas merger)?    
+Si le pipeline se déroule correctement, la branche peut être mergée.  
+Merger ensuite la branche vers la branche principale.  
+
+On peut enfin passer le ticket en 'Done'
+
+
+
 
 #TODO (Martin)
 
 - Tests d'intégration
 - Test de qualité de code
 
-### 4 - BUILD
+### 4 - BUILD DOCKER IMAGE
 
 #### Description
 
