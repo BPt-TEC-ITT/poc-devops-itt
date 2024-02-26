@@ -1,7 +1,6 @@
 # DevOps : A demo of tools and best-practices
 
-[![build](https://github.com/martinmouly/poc-devops-itt/actions/workflows/build.yml/badge.svg)](https://github.com/martinmouly/poc-devops-itt/actions/workflows/build.yml)
-[![deploy](https://github.com/martinmouly/poc-devops-itt/actions/workflows/deploy.yml/badge.svg)](https://github.com/martinmouly/poc-devops-itt/actions/workflows/deploy.yml)
+[![build](https://github.com/martinmouly/poc-devops-itt/actions/workflows/build.yml/badge.svg)](https://github.com/martinmouly/poc-devops-itt/actions/workflows/build.yml)  
 
 
 
@@ -79,11 +78,14 @@ L'exécution du pipeline déploiera la version sélectionnée (0.1 dans notre ex
 
 ### 1 - PLAN
 
-#TODO (Martin) : création de ticker pour nouvelle fonctionalité ou correction de bug
-
+L'objectif de l'étape Plan est de faire une rapide démonstration des dashboards typiquement utilisés pour planifier et faire le suivi des devs en cours. Ici, on utilise le board du projet associé ce repo.  
+Le board est déjà pré-configuré et le ticket sur lequel on va faire la démo est déjà créé. Il suffit de déplacer le ticket dans la colonne 'In progress'.   
+  
+<img width="837" alt="image" src="https://github.com/BPt-TEC-ITT/poc-devops-itt/assets/19230666/5efac84e-faba-4330-82f2-a76ff5c05e58">    
+  
 ### 2 - CODE
 
-#TODO (Martin): mettre à jour le code, nouvelle branche, merge, ...
+TO DO
 
 ### 3 - TEST
 
