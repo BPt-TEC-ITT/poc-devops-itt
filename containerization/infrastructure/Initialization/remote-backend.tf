@@ -11,19 +11,13 @@ provider "azurerm" {
   features {}
 }
 
-resource "random_string" "resource_code" {
-  length  = 5
-  special = false
-  upper   = false
-}
-
 resource "azurerm_resource_group" "POC-ITT-tfstate" {
   name     = "POCITT-Initialization"
   location = "East US"
 }
 
 resource "azurerm_storage_account" "tfstate" {
-  name                     = "tfstate-sa"
+  name                     = "tfstatepocitt2024"
   resource_group_name      = azurerm_resource_group.POC-ITT-tfstate.name
   location                 = azurerm_resource_group.POC-ITT-tfstate.location
   account_tier             = "Standard"

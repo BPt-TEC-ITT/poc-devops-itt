@@ -12,10 +12,10 @@ env:
 
 jobs:
   
-  deploy_on_azure_container_service:
-
+  poc_initialization:
     runs-on: ubuntu-latest
-
+    outputs:
+      output1: ${{steps.outputterraform.outputs}}
     steps:
         - uses: actions/checkout@v3
     
@@ -32,13 +32,70 @@ jobs:
           run: export ARM_CLIENT_ID=$ARM_CLIENT_ID
     
         - name: Initialize Terraform
-          working-directory: ./containerization/infrastructure/remote-backend
+          working-directory: ./containerization/infrastructure/Initialization
           run: terraform init
     
         - name: terraform plan
-          working-directory: ./containerization/infrastructure/remote-backend
+          working-directory: ./containerization/infrastructure/Initialization
           run: terraform plan
 
         - name: terraform apply
-          working-directory: ./containerization/infrastructure/remote-backend
+          working-directory: ./containerization/infrastructure/Initialization
           run: terraform apply -auto-approve
+
+        - name: set registry token
+          id: outputterraform
+          run: terraform output token >> "$GITHUB_OUTPUT"
+  
+  testvar:
+    needs: poc_initialization
+    runs-on: ubuntu-latest
+    steps:
+      - name: check
+        env:
+          registry_token: ${{  needs.poc_initialization.outputs  }}
+        run: echo "$registry_token"
+      
+
+  # first_build_base_image:
+  #   needs: poc_initialization
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - name: wait the creation of resources
+  #       run: sleep 30
+  #     - name: Login to azure container registry
+  #       env: 
+  #         registry_token: ${{  needs.poc_initialization.outputs.output1  }}
+  #       run: docker login -u containerRegistryPocITT -p $registry_token
+  #     - name: Create env file
+  #       working-directory: ./containerization/image-build
+  #       env:
+  #         MONGO_URI: ${{  secrets.MONGO_URI  }}
+  #         HOST_URL: ${{  secrets.HOST_URL  }}
+  #       run: |
+  #         touch .env
+  #         echo MONGO_URI=$MONGO_URI >> .env
+  #         echo HOST_URL=$HOST_URL >> .env
+  #     - name: build & add first app image to container our registry
+  #       working-directory: ./containerization/image-build
+  #       run: docker build . --tag containerRegistryPocITT/app-user:1.0
+  #     - name: Push images
+  #       run: docker push containerRegistryPocITT/app-user:1.0
+
+  # deploy:
+  #   needs: [poc_initialization, first_build_base_image]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses:  actions/checkout@v3
+  #     - name: Initialize Terraform
+  #       working-directory: ./containerization/infrastructure/deploy-container
+  #       run: terraform init
+
+  #     - name: Try terraform plan
+  #       working-directory: ./containerization/infrastructure/deploy-container
+  #       run: terraform plan -var application_version=1.0
+
+  #     - name: Deployment on ALL env
+  #       working-directory: ./containerization/infrastructure/deploy-container
+  #       run: terraform apply -var application_version=1.0 -auto-approve
