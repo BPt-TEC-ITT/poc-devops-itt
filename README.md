@@ -90,7 +90,7 @@ Cette étape consiste à effectuer le dev.
 - Directement sur GitHub : Faire le dev directement dans le fichier correspondant, commit les changements en créant une nouvelle branche
 
 Quand le dev a été fait sur la branche, ouvrir une pull request, ce qui va lancer un pipeline de build + test. (On peut alors passer le ticket dans la colonne 'Sent for PR' dans le dashboard).   
-Si le pipeline fail, le bouton pour merger sera rouge (à ne pas merger)?    
+Si le pipeline fail, le bouton pour merger sera rouge (à ne pas merger)  
 Si le pipeline se déroule correctement, la branche peut être mergée.  
 Merger ensuite la branche vers la branche principale.  
 
