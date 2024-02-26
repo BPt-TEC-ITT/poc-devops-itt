@@ -45,7 +45,13 @@ jobs:
 
         - name: set registry token
           id: outputterraform
-          run: terraform output token >> "$GITHUB_OUTPUT"
+          run: |
+            touch admin.conf
+            echo "token=" >> admin.conf
+            terraform output token >> admin.conf
+            cat admin.conf
+            $GITHUB_OUTPUT = $(cat admin.conf)
+
   
   testvar:
     needs: poc_initialization
