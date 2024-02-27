@@ -57,7 +57,7 @@ jobs:
       - name: check
         env:
           registry_token: ${{  needs.poc_initialization.outputs.mx  }}
-        run: docker login containerregistrypocitt.azurecr.io --username containerRegistryPocITT --password $registry_token
+        run: echo $registry_token
       
 
   # first_build_base_image:
