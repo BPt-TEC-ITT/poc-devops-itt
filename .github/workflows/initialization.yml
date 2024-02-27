@@ -15,7 +15,7 @@ jobs:
   poc_initialization:
     runs-on: ubuntu-latest
     outputs:
-      token: ${{  steps.outputterraform.outputs.token  }}
+      mx: ${{  steps.outputterraform.outputs.mx  }}
     steps:
         - uses: actions/checkout@v3
     
@@ -47,8 +47,8 @@ jobs:
           id: outputterraform
           working-directory: ./containerization/infrastructure/Initialization
           run: |
-            output=$(terraform output token)
-            echo "token=${output}" >> $GITHUB_OUTPUT
+            output=$(terraform output mx)
+            echo "mx=${mx}" >> $GITHUB_OUTPUT
 
   
   # testvar:
@@ -70,7 +70,7 @@ jobs:
         run: sleep 1m
       - name: Login to azure container registry
         env: 
-          registry_token: ${{  needs.poc_initialization.outputs.token  }}
+          registry_token: ${{  needs.poc_initialization.outputs.mx  }}
         run: 
           docker login containerregistrypocitt.azurecr.io -u containerRegistryPocITT -p $registry_token
       - name: Create env file

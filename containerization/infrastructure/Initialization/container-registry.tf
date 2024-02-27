@@ -6,7 +6,7 @@ resource "azurerm_container_registry" "acr" {
   admin_enabled       = true
 }
 
-output "token" {
+output "mx" {
   value = azurerm_container_registry.acr.admin_password
   sensitive = true
 }
