@@ -103,6 +103,22 @@ Merger ensuite la branche vers la branche principale.
 On peut enfin passer le ticket en 'Done', et passer au déploiement.  
 
 
+### 3 - TEST : SCAN SONAR  
+Afin de faire une démonstration plus poussée de Sonar, on peut volontairement inclure du mauvais code dans l'application afin de voir l'utilité d'un scan Sonar.  
+Créer une nouvelle branche et inclure dans le fichier server/controller/controller.js ce bout de code :  
+```javascript
+let password = 'azerty1234';
+while(true) {
+    console.log(password);
+    break;
+}
+```
+Créer ensuite la pull request. Ce code va être detecté par le scan Sonar comme une vulnérabilité car il affiche un password en dur, ainsi qu'un bug car la boucle while est inutile.  
+Le détail du scan sera disponible ici : https://sonarcloud.io/project/pull_requests_list?id=martinmouly_poc-devops-itt  
+  
+![image](https://github.com/BPt-TEC-ITT/poc-devops-itt/assets/19230666/3a3628d0-42f9-4170-b687-bfb504f435a5)
+
+
 
 ### 4 - BUILD DOCKER IMAGE
 
