@@ -70,25 +70,25 @@ jobs:
         run: sleep 1m
       - name: Login to azure container registry
         env: 
-          registry_token: ${{  needs.poc_initialization.outputs.mx  }}
-        run: |
-          echo "$registry_token" >> conf.txt
-          cat conf.txt
-          cat conf.txt | docker login containerregistrypocitt.azurecr.io --username containerRegistryPocITT --password-stdin
-      - name: Create env file
-        working-directory: ./containerization/image-build
-        env:
-          MONGO_URI: ${{  secrets.MONGO_URI  }}
-          HOST_URL: ${{  secrets.HOST_URL  }}
-        run: |
-          touch .env
-          echo MONGO_URI=$MONGO_URI >> .env
-          echo HOST_URL=$HOST_URL >> .env
-      - name: build & add first app image to container our registry
-        working-directory: ./containerization/image-build
-        run: docker build . --tag containerRegistryPocITT/app-user:1.0
-      - name: Push images
-        run: docker push containerRegistryPocITT/app-user:1.0
+          mx: ${{  needs.poc_initialization.outputs.mx  }}
+        run: echo $mx
+      #   run: |
+      #     echo "$mx" >> conf.txt
+      #     cat conf.txt | docker login containerregistrypocitt.azurecr.io --username containerRegistryPocITT --password-stdin
+      # - name: Create env file
+      #   working-directory: ./containerization/image-build
+      #   env:
+      #     MONGO_URI: ${{  secrets.MONGO_URI  }}
+      #     HOST_URL: ${{  secrets.HOST_URL  }}
+      #   run: |
+      #     touch .env
+      #     echo MONGO_URI=$MONGO_URI >> .env
+      #     echo HOST_URL=$HOST_URL >> .env
+      # - name: build & add first app image to container our registry
+      #   working-directory: ./containerization/image-build
+      #   run: docker build . --tag containerRegistryPocITT/app-user:1.0
+      # - name: Push images
+      #   run: docker push containerRegistryPocITT/app-user:1.0
 
   # deploy:
   #   needs: [poc_initialization, first_build_base_image]
