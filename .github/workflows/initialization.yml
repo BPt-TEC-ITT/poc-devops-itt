@@ -47,7 +47,7 @@ jobs:
           id: outputterraform
           working-directory: ./containerization/infrastructure/Initialization
           run: |
-            output=$(terraform output mx)
+            mx=$(terraform output mx)
             echo "mx=${mx}" >> $GITHUB_OUTPUT
 
   
@@ -67,7 +67,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: wait the creation of resources
-        run: sleep 1m
+        run: sleep 5
       - name: Login to azure container registry
         env: 
           mx: ${{  needs.poc_initialization.outputs.mx  }}
