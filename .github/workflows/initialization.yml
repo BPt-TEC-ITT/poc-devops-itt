@@ -71,8 +71,10 @@ jobs:
       - name: Login to azure container registry
         env: 
           registry_token: ${{  needs.poc_initialization.outputs.mx  }}
-        run: 
-          docker login containerregistrypocitt.azurecr.io -u containerRegistryPocITT -p $registry_token
+        run: |
+          echo "$registry_token" >> conf.txt
+          cat conf.txt
+          cat conf.txt | docker login containerregistrypocitt.azurecr.io --username containerRegistryPocITT --password-stdin
       - name: Create env file
         working-directory: ./containerization/image-build
         env:
