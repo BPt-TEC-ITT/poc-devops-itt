@@ -15,7 +15,7 @@ jobs:
   poc_initialization:
     runs-on: ubuntu-latest
     outputs:
-      output1: ${{steps.outputterraform.outputs}}
+      output1: ${{  steps.outputterraform.outputs.token  }}
     steps:
         - uses: actions/checkout@v3
     
@@ -46,9 +46,7 @@ jobs:
         - name: set registry token
           id: outputterraform
           run: |
-            terraform output token
-            terraform output token >> admin.conf
-            cat admin.conf
+            echo "token=$(terraform output token)" >> $GITHUB_OUTPUT
 
   
   testvar:
@@ -57,7 +55,7 @@ jobs:
     steps:
       - name: check
         env:
-          registry_token: ${{  needs.poc_initialization.outputs  }}
+          registry_token: ${{  needs.poc_initialization.outputs.output1  }}
         run: echo "$registry_token"
       
 
