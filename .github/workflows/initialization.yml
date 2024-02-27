@@ -45,6 +45,7 @@ jobs:
 
         - name: set registry token
           id: outputterraform
+          working-directory: ./containerization/infrastructure/Initialization
           run: |
             echo "token=$(terraform output token)" >> $GITHUB_OUTPUT
 
