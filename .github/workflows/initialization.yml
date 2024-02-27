@@ -48,7 +48,7 @@ jobs:
           working-directory: ./containerization/infrastructure/Initialization
           run: |
             token=$(terraform output token)
-            echo "token=$token" >> $GITHUB_OUTPUT
+            echo "token=123456789" >> $GITHUB_OUTPUT
 
   
   # testvar:
