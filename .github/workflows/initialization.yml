@@ -1,4 +1,3 @@
-
 name: POC initialization
 
 on:
@@ -15,7 +14,7 @@ jobs:
   poc_initialization:
     runs-on: ubuntu-latest
     outputs:
-      mx: ${{  steps.outputterraform.outputs.mx  }}
+      token: ${{  steps.outputterraform.outputs.token  }}
     steps:
         - uses: actions/checkout@v3
     
@@ -47,42 +46,46 @@ jobs:
           id: outputterraform
           working-directory: ./containerization/infrastructure/Initialization
           run: |
-            echo "mx=$(terraform output mx)" >> "$GITHUB_OUTPUT"
-
+            output=$(terraform output token)
+            echo "token=${output}" >> $GITHUB_OUTPUT
   
-  testvar:
-    needs: poc_initialization
-    runs-on: ubuntu-latest
-    steps:
-      - name: check
-        env:
-          registry_token: ${{  needs.poc_initialization.outputs.mx  }}
-        run: echo $registry_token
-      
-
-  # first_build_base_image:
+  # testvar:
   #   needs: poc_initialization
   #   runs-on: ubuntu-latest
   #   steps:
-  #     - name: Login to azure container registry
-  #       run: echo "${{  needs.poc_initialization.outputs.mx  }}"
-      #   run: |
-      #     echo "$mx" >> conf.txt
-      #     cat conf.txt | docker login containerregistrypocitt.azurecr.io --username containerRegistryPocITT --password-stdin
-      # - name: Create env file
-      #   working-directory: ./containerization/image-build
-      #   env:
-      #     MONGO_URI: ${{  secrets.MONGO_URI  }}
-      #     HOST_URL: ${{  secrets.HOST_URL  }}
-      #   run: |
-      #     touch .env
-      #     echo MONGO_URI=$MONGO_URI >> .env
-      #     echo HOST_URL=$HOST_URL >> .env
-      # - name: build & add first app image to container our registry
-      #   working-directory: ./containerization/image-build
-      #   run: docker build . --tag containerRegistryPocITT/app-user:1.0
-      # - name: Push images
-      #   run: docker push containerRegistryPocITT/app-user:1.0
+  #     - name: check
+  #       env:
+  #         registry_token: ${{  needs.poc_initialization.outputs.token  }}
+  #       run: echo "$registry_token"
+      
+
+  first_build_base_image:
+    needs: poc_initialization
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: wait the creation of resources
+        run: sleep 30
+      - name: Login to azure container registry
+        env: 
+          registry_token: ${{  needs.poc_initialization.outputs.token  }}
+        run: |
+          echo $registry_token
+          docker login containerregistrypocitt.azurecr.io -u containerRegistryPocITT -p $registry_token
+      - name: Create env file
+        working-directory: ./containerization/image-build
+        env:
+          MONGO_URI: ${{  secrets.MONGO_URI  }}
+          HOST_URL: ${{  secrets.HOST_URL  }}
+        run: |
+          touch .env
+          echo MONGO_URI=$MONGO_URI >> .env
+          echo HOST_URL=$HOST_URL >> .env
+      - name: build & add first app image to container our registry
+        working-directory: ./containerization/image-build
+        run: docker build . --tag containerRegistryPocITT/app-user:1.0
+      - name: Push images
+        run: docker push containerRegistryPocITT/app-user:1.0
 
   # deploy:
   #   needs: [poc_initialization, first_build_base_image]
@@ -99,4 +102,4 @@ jobs:
 
   #     - name: Deployment on ALL env
   #       working-directory: ./containerization/infrastructure/deploy-container
-  #       run: terraform apply -var application_version=1.0 -auto-approve
+  #       run: terraform apply -var application_version=1.0 
