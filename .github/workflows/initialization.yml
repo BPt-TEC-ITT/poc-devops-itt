@@ -66,9 +66,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Login to azure container registry
-        env: 
-          mx: ${{  needs.poc_initialization.outputs.mx  }}
-        run: echo "${mx}"
+        run: echo "${{  needs.poc_initialization.outputs.mx  }}"
       #   run: |
       #     echo "$mx" >> conf.txt
       #     cat conf.txt | docker login containerregistrypocitt.azurecr.io --username containerRegistryPocITT --password-stdin
