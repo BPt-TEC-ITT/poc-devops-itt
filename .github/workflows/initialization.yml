@@ -15,7 +15,7 @@ jobs:
   poc_initialization:
     runs-on: ubuntu-latest
     outputs:
-      output1: ${{  steps.outputterraform.outputs.token  }}
+      token: ${{  steps.outputterraform.outputs.token  }}
     steps:
         - uses: actions/checkout@v3
     
@@ -50,41 +50,41 @@ jobs:
             echo "token=$(terraform output token)" >> $GITHUB_OUTPUT
 
   
-  testvar:
-    needs: poc_initialization
-    runs-on: ubuntu-latest
-    steps:
-      - name: check
-        env:
-          registry_token: ${{  needs.poc_initialization.outputs.output1  }}
-        run: echo "$registry_token"
-      
-
-  # first_build_base_image:
+  # testvar:
   #   needs: poc_initialization
   #   runs-on: ubuntu-latest
   #   steps:
-  #     - uses: actions/checkout@v3
-  #     - name: wait the creation of resources
-  #       run: sleep 30
-  #     - name: Login to azure container registry
-  #       env: 
-  #         registry_token: ${{  needs.poc_initialization.outputs.output1  }}
-  #       run: docker login -u containerRegistryPocITT -p $registry_token
-  #     - name: Create env file
-  #       working-directory: ./containerization/image-build
+  #     - name: check
   #       env:
-  #         MONGO_URI: ${{  secrets.MONGO_URI  }}
-  #         HOST_URL: ${{  secrets.HOST_URL  }}
-  #       run: |
-  #         touch .env
-  #         echo MONGO_URI=$MONGO_URI >> .env
-  #         echo HOST_URL=$HOST_URL >> .env
-  #     - name: build & add first app image to container our registry
-  #       working-directory: ./containerization/image-build
-  #       run: docker build . --tag containerRegistryPocITT/app-user:1.0
-  #     - name: Push images
-  #       run: docker push containerRegistryPocITT/app-user:1.0
+  #         registry_token: ${{  needs.poc_initialization.outputs.token  }}
+  #       run: echo "$registry_token"
+      
+
+  first_build_base_image:
+    needs: poc_initialization
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: wait the creation of resources
+        run: sleep 30
+      - name: Login to azure container registry
+        env: 
+          registry_token: ${{  needs.poc_initialization.outputs.token  }}
+        run: docker login -u containerRegistryPocITT -p $registry_token
+      - name: Create env file
+        working-directory: ./containerization/image-build
+        env:
+          MONGO_URI: ${{  secrets.MONGO_URI  }}
+          HOST_URL: ${{  secrets.HOST_URL  }}
+        run: |
+          touch .env
+          echo MONGO_URI=$MONGO_URI >> .env
+          echo HOST_URL=$HOST_URL >> .env
+      - name: build & add first app image to container our registry
+        working-directory: ./containerization/image-build
+        run: docker build . --tag containerRegistryPocITT/app-user:1.0
+      - name: Push images
+        run: docker push containerRegistryPocITT/app-user:1.0
 
   # deploy:
   #   needs: [poc_initialization, first_build_base_image]
