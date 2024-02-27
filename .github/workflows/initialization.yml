@@ -47,7 +47,7 @@ jobs:
           id: outputterraform
           working-directory: ./containerization/infrastructure/Initialization
           run: |
-            mx=${terraform output mx}
+            mx=$(terraform output mx)
             echo "mx=${mx}" >> "$GITHUB_OUTPUT"
 
   
