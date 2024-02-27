@@ -47,7 +47,8 @@ jobs:
           id: outputterraform
           working-directory: ./containerization/infrastructure/Initialization
           run: |
-            echo "token=$(terraform output token)" >> $GITHUB_OUTPUT
+            token=$(terraform output token)
+            echo "token=$token" >> $GITHUB_OUTPUT
 
   
   # testvar:
@@ -70,7 +71,9 @@ jobs:
       - name: Login to azure container registry
         env: 
           registry_token: ${{  needs.poc_initialization.outputs.token  }}
-        run: docker login containerregistrypocitt.azurecr.io -u containerRegistryPocITT -p "$registry_token"
+        run: |
+          echo $registry_token
+          docker login containerregistrypocitt.azurecr.io -u containerRegistryPocITT -p $registry_token
       - name: Create env file
         working-directory: ./containerization/image-build
         env:
