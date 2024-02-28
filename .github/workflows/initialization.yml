@@ -44,7 +44,7 @@ jobs:
           working-directory: ./containerization/infrastructure/Initialization
           run: terraform output mx >> conf.txt
 
-        - name: upload registry token
+        - name: cache registry token
           uses: actions/upload-artifact@v4
           with:
             name: conf
@@ -59,8 +59,7 @@ jobs:
         with:
           name: conf
       - name: display result
-        run: |
-          cat /containerization/infrastructure/Initialization/conf.txt
+        run: 
           cat conf.txt
       
 
