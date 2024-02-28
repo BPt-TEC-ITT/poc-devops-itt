@@ -33,46 +33,35 @@ The code stored in this repository is our mock web app. It's a simple CRUD web a
 
 ### Prérequis
 
-- Avoir à minima le rôle Colabarateur sur le projet git : afin de pourvoir accéder à l'onglet "action" pour lancer les pipelines
+- Avoir le rôle **Maintain** ou **Admin** sur le repo [poc-devops-itt](https://github.com/BPt-TEC-ITT/poc-devops-itt) sur le projet git : afin de pourvoir accéder à l'onglet "action" pour lancer les pipelines et mettre à jour les variables secretes du projet
 - Avoir un compte utilisateur Azure (Contibutor role) : pour accéder au portail Azure et accéder aux ressources qui seront créées par les pipeline
-- Avoir un accès programmatic à Azure (Azure principal) : cet acces sera utilisé par Terraform pour gérer automatiquement les ressoures Azure via le pipeline Github Action.
-Pour plus d'information, voir la [Documentation d'Azure](https://learn.microsoft.com/en-us/azure/developer/terraform/authenticate-to-azure?tabs=bash#create-a-service-principal)
-
-## Comment lancer le PoC ?
-
-### Configurer le repo Github
-
-Pour mettre à jour les variables et les secrets du repo Git : **Settings > Secretes and variables > Actions > Repository Secrets**
-
-- Mettre à jour les secrets et variables
-  - Paramètres de connexion à la base de donnée
-    - HOST_URL
-    - MONGO_URI
-  - Azure credentials
-    - ARM_CLIENT_ID
-    - ARM_CLIENT_SECRET
-    - ARM_SUBSCRIPTION
-    - ARM_TENANT_ID
-  - Container registry token
-    - REGISTRY_TOKEN 
-
-![plot](./images/secrets-settings.png)
 
 ## Initialisation du PoC
 
-- Initialisation des configuration de Terraform (à faire en local)
-  - #TODO (Soulémanou)
+- Lancez le pipeline **initialization** depuis l'onget "Action".
+![plot](./images/workflow-init-launch.png)
+![plot](./images/init-steps.png)
 
-- Depuis l'onglet "**Action**", Lancer le workflow **Azure Container deployment** avec les paramètres ci-dessous :
-  - Deployment environment : **all**
-  - Application version : **0.1**
+Ce pipeline pemettra de :
+  - Créer un **registre de conteneur** avec une première (1.0) image version de l'application conteneurisée
+    - Déployer une première version de l'application dans les environnements de recette et de production
+      - environnement de **recette** : <http://test-poc-devops.eastus.azurecontainer.io:3000/>
+      - environnement de **production** : <http://prod-poc-devops.eastus.azurecontainer.io:3000/>
+  - Mettez à jour le secret **REGISTRY_TOKEN** (Settings > Secretes and variables > Actions > Repository secrets)
+    - Récupérez la valeur du registry token sur [Azure](https://portal.azure.com/#home)
+    ![plot](./images/search-ressource-groups.png)
+    ![plot](./images/select-container-registry.png)
+    ![plot](./images/copy-pass.png)
+    - Puis mettez à jour le secret Registry token sur [github](https://github.com/BPt-TEC-ITT/poc-devops-itt)
+    ![plot](./images/update-registry-token.png)
+    ![plot](./images/paste-registry-token.png)
 
-![plot](./images/all-initialisation.png)
+Notes :
 
-L'exécution du pipeline déploiera la version sélectionnée (0.1 dans notre exemple) de l'application dans les environnements de **prod** et de **test** accessible vie la liens ci-dessous quelques minutes après l'exécution du workflow :
+- L'exécution du pipeline **initialization** peut prendre plusieurs minutes (5 mins). A la fin de l'exécution du pipeline, vous pourrez vérifier que les ressources ont bien été créées sur le cloud Azure
+![plot](./images/ressource-group-list.png)
+- Si le pipeline échoue, ouvrez le [portail Azure](https://portal.azure.com/#home) et supprimez les groupe de ressources **POCITT-Initialization, POCITT-DEV & POCITT-PROD** puis relancez le pipeline une fois que la suppression est effective (environ 5 mins)
 
-- PROD : <http://prod-itt-poc-devops.eastus.azurecontainer.io:3000/>
-- TEST : <http://test-itt-poc-devops.eastus.azurecontainer.io:3000/>
 
 ## Exécution du PoC : PLAN -> CODE -> BUILD -> TEST -> DEPLOY
 
@@ -119,43 +108,13 @@ Le détail du scan sera disponible ici : https://sonarcloud.io/project/pull_requ
 ![image](https://github.com/BPt-TEC-ITT/poc-devops-itt/assets/19230666/3a3628d0-42f9-4170-b687-bfb504f435a5)
 
 
-
-### 4 - BUILD DOCKER IMAGE
-
-#### Description
-
-Cette étape permet de construire une image de conteneur de l'application prenant en compte les dernières modifications faites sur la branche principale. Cette image sera stocké dans un registre de conteneur [ici](https://hub.docker.com/r/sngbango/app-poc/tags).
-
-
-
-#### Comment lancer le workflow ?
-
-Dans l'onglet "**Action**" du repo git, lancer le workflow **Build docker image** en specifiant en paramètre la version de l'image qui va être déployée
-
-Note: vous devrez spécifier la même version aux étapes **DEPLOY (test et build)**. Assurez vous que l'image de conteneur a bien été créée ([registre de conteneur](https://hub.docker.com/r/sngbango/app-poc/tags))
-
-![plot](./images/Docker-build-workflow.png)
-
-Note : Pour les besoins du POC, nous utilisons temporairement [Docker Hub](https://hub.docker.com/r/sngbango/app-poc/tags) comme registre de conteneur.
-
 ### 4 - DEPLOY (environnement de TEST)
 
 #### Description
 
-Cette étape permet de déployer la dernière version de l'application en environnement de Test.
+Cette étape permet de déployer la dernière version de l'application en environnement de [recette](http://test-poc-devops.eastus.azurecontainer.io:3000/).
 
-#### Comment lancer le workflow ?
-
-Dans l'onglet "**Action**" du repo git, lancer le workflow **Azure container deployment** avec les paramètres :
-
-- Deployment environment : **test**
-- Application version : *la même version que celle spécifiée à l'étape "BUILD" (exemple: 1.0)*
-
-A la fin de l'exécution du workflow, vous pouvez vérifier que la dernière version de l'application a bien été dépoyée en [TEST](http://test-itt-poc-devops.eastus.azurecontainer.io:3000/) : <http://test-itt-poc-devops.eastus.azurecontainer.io:3000/>
-
-![plot](./images/latest-test-deploy.png)
-
-**Note** : Il est possible de voir les détails d'exécution du workflow en cliquant sur le nom du workflow.
+**Notes** : Le déploiement ce fait automatiquement après avoir mergé une Pull Request sur la branche **main**. Vous pouvez voir les détails du déploiement dans l'onglet **action**
 
 ### 4bis - DEPLOY (environnement de PROD)
 
@@ -166,8 +125,9 @@ Cette étape permet de déployer la dernière version de l'application en enviro
 Dans l'onglet "**Action**" du repo git, lancer le workflow **Azure container deployment** avec les paramètres :
 
 - Deployment environment : **prod**
-- Application version : *la même version que celle spécifiée à l'étape "BUILD" (exemple: 1.0)*
-A la fin de l'exécution du workflow, vous pouvez vérifier que la dernière version de l'application a bien été dépoyée en [PROD](http://prod-itt-poc-devops.eastus.azurecontainer.io:3000/) : <http://prod-itt-poc-devops.eastus.azurecontainer.io:3000/>
+- Application version : **latest**
+
+A la fin de l'exécution du workflow, vous pouvez vérifier que la dernière version de l'application a bien été dépoyée en [PROD](http://prod-poc-devops.eastus.azurecontainer.io:3000/) : <http://prod-poc-devops.eastus.azurecontainer.io:3000/>
 
 ![plot](./images/latest-prod-depoyment.png)
 
