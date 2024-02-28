@@ -5,6 +5,12 @@ resource "azurerm_container_group" "container-poc-prod" {
   dns_name_label      = "prod-poc-devops"
   os_type             = "Linux"
 
+  image_registry_credential {
+    server = "containerregistrypocitt.azurecr.io"
+    username = "containerregistrypocitt"
+    password = "${var.registry_password}"
+  }
+
   container {
     name   = "poc-devops-container"
     image  = "containerregistrypocitt.azurecr.io/app-user:${var.application_version}"
@@ -27,6 +33,12 @@ resource "azurerm_container_group" "container-poc-test" {
   resource_group_name = azurerm_resource_group.rg-container-test.name
   dns_name_label      = "test-poc-devops"
   os_type             = "Linux"
+
+  image_registry_credential {
+    server = "containerregistrypocitt.azurecr.io"
+    username = "containerregistrypocitt"
+    password = "${var.registry_password}"
+  }
 
   container {
     name   = "poc-devops-container"
