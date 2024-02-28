@@ -3,6 +3,12 @@ name: Build docker image
 on:
   push:
     branches: [ "v1.0/main" ]
+    
+env:
+  ARM_CLIENT_SECRET: ${{  secrets.ARM_CLIENT_SECRET  }}
+  ARM_SUBSCRIPTION_ID: ${{  secrets.ARM_SUBSCRIPTION_ID  }}
+  ARM_TENANT_ID: ${{  secrets.ARM_TENANT_ID  }}
+  ARM_CLIENT_ID: ${{  secrets.ARM_CLIENT_ID  }}
 
 jobs:
   build_docker_image:
@@ -29,7 +35,7 @@ jobs:
       run: docker push containerregistrypocitt.azurecr.io/app-user:latest
   
   deploy_on_dev_env:
-
+    needs: build_docker_image
     runs-on: ubuntu-latest
     
     steps:
