@@ -61,10 +61,11 @@ jobs:
       - name: download artifact
         uses: actions/download-artifact@v4
         with:
-          name: cat conf
+          name: conf
 
       - name: display
         run: cat conf.txt
+        
       - name: display result
         run: docker login containerregistrypocitt.azurecr.io -u containerRegistryPocITT -p "$(cat conf.txt)"
 
