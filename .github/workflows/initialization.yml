@@ -60,7 +60,7 @@ jobs:
           name: conf
       - name: display result
         run: 
-          cat conf.txt
+          cat conf.txt | docker login containerregistrypocitt.azurecr.io -u containerRegistryPocITT --password-stdin
       
 
   # first_build_base_image:
