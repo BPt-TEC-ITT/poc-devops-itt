@@ -3,11 +3,6 @@ name: Build docker image
 on:
   push:
     branches: [ "v1.0/main" ]
-  # workflow_dispatch:
-  #   inputs:
-  #     version:
-  #       description: 'image version to build (ex: 0.0)'
-  #       required: true
 
 jobs:
   build_docker_image:
@@ -32,3 +27,38 @@ jobs:
       run: docker build . --tag containerregistrypocitt.azurecr.io/app-user:latest
     - name: Push images
       run: docker push containerregistrypocitt.azurecr.io/app-user:latest
+  
+  deploy_on_dev_env:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: configure client secret
+      run: export ARM_CLIENT_SECRET=$ARM_CLIENT_SECRET
+    
+    - name: configure subscription id
+      run: export ARM_SUBSCRIPTION_ID=$ARM_SUBSCRIPTION_ID
+    
+    - name: configure tenant id
+      run: export ARM_TENANT_ID=$ARM_TENANT_ID
+
+    - name: configure client id
+      run: export ARM_CLIENT_ID=$ARM_CLIENT_ID
+
+    - name: Initialize Terraform
+      working-directory: ./containerization/infrastructure/deploy-container
+      run: terraform init
+
+    - name: Try terraform
+      env: 
+        registry_token: ${{ secrets.REGISTRY_TOKEN }}
+      working-directory: ./containerization/infrastructure/deploy-container
+      run: terraform plan -var application_version=latest -var registry_password=$registry_token
+
+    - name: Deployment on dev
+      env: 
+        registry_token: ${{ secrets.REGISTRY_TOKEN }}
+      working-directory: ./containerization/infrastructure/deploy-container
+      run: terraform apply -var application_version=latest  -var registry_password=$registry_token -target azurerm_container_group.container-poc-test -auto-approve
