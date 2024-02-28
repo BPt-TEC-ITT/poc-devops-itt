@@ -56,7 +56,7 @@ jobs:
     steps:
 
       - name: timeout
-        run: sleep 30
+        run: sleep 2m
 
       - name: download artifact
         uses: actions/download-artifact@v4
