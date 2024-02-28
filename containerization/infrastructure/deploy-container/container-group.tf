@@ -1,13 +1,19 @@
 resource "azurerm_container_group" "container-poc-prod" {
-  name                = "prod-poc-container-group"
+  name                = "prod-container-group"
   location            = azurerm_resource_group.rg-container-prod.location
   resource_group_name = azurerm_resource_group.rg-container-prod.name
-  dns_name_label      = "prod-itt-poc-devops"
+  dns_name_label      = "prod-poc-devops"
   os_type             = "Linux"
+
+  image_registry_credential {
+    server = "containerregistrypocitt.azurecr.io"
+    username = "containerregistrypocitt"
+    password = "${var.registry_password}"
+  }
 
   container {
     name   = "poc-devops-container"
-    image  = "sngbango/app-poc:${var.application_version}"
+    image  = "containerregistrypocitt.azurecr.io/app-user:${var.application_version}"
     cpu    = "0.5"
     memory = "1.5"
     ports {
@@ -22,15 +28,21 @@ resource "azurerm_container_group" "container-poc-prod" {
 }
 
 resource "azurerm_container_group" "container-poc-test" {
-  name                = "test-poc-container-group"
+  name                = "test-container-group"
   location            = azurerm_resource_group.rg-container-test.location
   resource_group_name = azurerm_resource_group.rg-container-test.name
-  dns_name_label      = "test-itt-poc-devops"
+  dns_name_label      = "test-poc-devops"
   os_type             = "Linux"
+
+  image_registry_credential {
+    server = "containerregistrypocitt.azurecr.io"
+    username = "containerregistrypocitt"
+    password = "${var.registry_password}"
+  }
 
   container {
     name   = "poc-devops-container"
-    image  = "sngbango/app-poc:${var.application_version}"
+    image  = "containerregistrypocitt.azurecr.io/app-user:${var.application_version}"
     cpu    = "0.5"
     memory = "1.5"
     ports {
