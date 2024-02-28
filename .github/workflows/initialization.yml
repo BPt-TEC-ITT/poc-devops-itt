@@ -88,13 +88,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses:  actions/checkout@v3
-      - name: Initialize Terraform
-        working-directory: ./containerization/infrastructure/deploy-container
-        run: terraform init
-
-      - name: Try terraform plan
-        working-directory: ./containerization/infrastructure/deploy-container
-        run: terraform plan -var application_version=1.0
 
       - name: download artifact
         uses: actions/download-artifact@v4
@@ -103,6 +96,14 @@ jobs:
       
       - name: copy conf.txt
         run: cp conf.txt ./containerization/infrastructure/deploy-container/conf.txt
+
+      - name: Initialize Terraform
+        working-directory: ./containerization/infrastructure/deploy-container
+        run: terraform init
+
+      - name: Try terraform plan 
+        working-directory: ./containerization/infrastructure/deploy-container
+        run: terraform plan -var application_version=1.0 -var registry_password=$(sed 's/\"//g' conf.txt)
 
       - name: Deployment on test and prod
         working-directory: ./containerization/infrastructure/deploy-container
