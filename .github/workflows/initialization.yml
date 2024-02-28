@@ -96,9 +96,9 @@ jobs:
           echo HOST_URL=$HOST_URL >> .env
       - name: build & add first app image to container our registry
         working-directory: ./containerization/image-build
-        run: docker build . --tag containerregistrypocitt/app-user:1.0
+        run: docker build . --tag containerregistrypocitt.azurecr.io/app-user:1.0
       - name: Push images
-        run: docker push containerregistrypocitt/app-user:1.0
+        run: docker push containerregistrypocitt.azurecr.io/app-user:1.0
 
   # deploy:
   #   needs: [poc_initialization, first_build_base_image]
