@@ -7,7 +7,7 @@ resource "azurerm_container_group" "container-poc-prod" {
 
   container {
     name   = "poc-devops-container"
-    image  = "containerRegistryPocITT/app-user:${var.application_version}"
+    image  = "containerregistrypocitt/app-user:${var.application_version}"
     cpu    = "0.5"
     memory = "1.5"
     ports {
@@ -30,7 +30,7 @@ resource "azurerm_container_group" "container-poc-test" {
 
   container {
     name   = "poc-devops-container"
-    image  = "containerRegistryPocITT/app-user:${var.application_version}"
+    image  = "containerregistrypocitt/app-user:${var.application_version}"
     cpu    = "0.5"
     memory = "1.5"
     ports {

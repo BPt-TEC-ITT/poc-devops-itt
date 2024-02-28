@@ -83,7 +83,7 @@ jobs:
 
       - name: Login to azure container registry
         run: 
-          docker login containerregistrypocitt.azurecr.io -u containerRegistryPocITT -p $(sed 's/\"//g' conf.txt)
+          docker login containerregistrypocitt.azurecr.io -u containerregistrypocitt -p $(sed 's/\"//g' conf.txt)
 
       - name: Create env file
         working-directory: ./containerization/image-build
@@ -96,9 +96,9 @@ jobs:
           echo HOST_URL=$HOST_URL >> .env
       - name: build & add first app image to container our registry
         working-directory: ./containerization/image-build
-        run: docker build . --tag containerRegistryPocITT/app-user:1.0
+        run: docker build . --tag containerregistrypocitt/app-user:1.0
       - name: Push images
-        run: docker push containerRegistryPocITT/app-user:1.0
+        run: docker push containerregistrypocitt/app-user:1.0
 
   # deploy:
   #   needs: [poc_initialization, first_build_base_image]
