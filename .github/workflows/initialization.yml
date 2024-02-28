@@ -56,7 +56,7 @@ jobs:
     steps:
 
       - name: timeout
-        run: sleep 2m
+        run: sleep 30
 
       - name: download artifact
         uses: actions/download-artifact@v4
@@ -67,7 +67,7 @@ jobs:
         run: cat conf.txt
 
       - name: display result
-        run: docker login containerregistrypocitt.azurecr.io -u containerRegistryPocITT -p $(cat conf.txt)
+        run: docker login containerregistrypocitt.azurecr.io -u containerRegistryPocITT -p $(sed 's/\"//g' conf.txt)
 
           # cat conf.txt | docker login containerregistrypocitt.azurecr.io -u containerRegistryPocITT --password-stdin
       
