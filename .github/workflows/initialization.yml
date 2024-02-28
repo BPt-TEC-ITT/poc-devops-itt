@@ -65,9 +65,9 @@ jobs:
 
       - name: display
         run: cat conf.txt
-        
+
       - name: display result
-        run: docker login containerregistrypocitt.azurecr.io -u containerRegistryPocITT -p "$(cat conf.txt)"
+        run: docker login containerregistrypocitt.azurecr.io -u containerRegistryPocITT -p $(cat conf.txt)
 
           # cat conf.txt | docker login containerregistrypocitt.azurecr.io -u containerRegistryPocITT --password-stdin
       
