@@ -22,6 +22,7 @@ env:
   ARM_SUBSCRIPTION_ID: ${{  secrets.ARM_SUBSCRIPTION_ID  }}
   ARM_TENANT_ID: ${{  secrets.ARM_TENANT_ID  }}
   ARM_CLIENT_ID: ${{  secrets.ARM_CLIENT_ID  }}
+  registry_token: ${{ secrets.REGISTRY_TOKEN }}
 
 jobs:
   
@@ -51,19 +52,19 @@ jobs:
     - name: Try terraform plan on PROD env
       if: ${{ github.event.inputs.env  == 'prod' }}
       working-directory: ./containerization/infrastructure/deploy-container
-      run: terraform plan -var application_version=${{ github.event.inputs.version }} -target azurerm_container_group.container-poc-${{ github.event.inputs.env }}
+      run: terraform plan -var application_version=${{ github.event.inputs.version }} -var registry_password=$registry_token -target azurerm_container_group.container-poc-${{ github.event.inputs.env }}
 
     - name: Deployment on PROD env
       if: ${{ github.event.inputs.env == 'prod' }}
       working-directory: ./containerization/infrastructure/deploy-container
-      run: terraform apply -var application_version=${{ github.event.inputs.version }} -target azurerm_container_group.container-poc-${{ github.event.inputs.env }} -auto-approve
+      run: terraform apply -var application_version=${{ github.event.inputs.version }} -var registry_password=$registry_token -target azurerm_container_group.container-poc-${{ github.event.inputs.env }} -auto-approve
     
     - name: Try terraform plan on TEST env
       if: ${{ github.event.inputs.env == 'test' }}
       working-directory: ./containerization/infrastructure/deploy-container
-      run: terraform plan -var application_version=${{ github.event.inputs.version }} -target azurerm_container_group.container-poc-${{ github.event.inputs.env }}
+      run: terraform plan -var application_version=${{ github.event.inputs.version }} -var registry_password=$registry_token -target azurerm_container_group.container-poc-${{ github.event.inputs.env }}
 
     - name: Deployment on TEST env
       if: ${{ github.event.inputs.env == 'test' }}
       working-directory: ./containerization/infrastructure/deploy-container
-      run: terraform apply -var application_version=${{ github.event.inputs.version }} -target azurerm_container_group.container-poc-${{ github.event.inputs.env }} -auto-approve
+      run: terraform apply -var application_version=${{ github.event.inputs.version }} -var registry_password=$registry_token -target azurerm_container_group.container-poc-${{ github.event.inputs.env }} -auto-approve
