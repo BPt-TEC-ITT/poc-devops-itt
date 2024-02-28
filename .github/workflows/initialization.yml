@@ -50,12 +50,30 @@ jobs:
             name: conf
             path: ./containerization/infrastructure/Initialization/conf.txt
   
-  testvar:
+  # testvar:
+  #   needs: poc_initialization
+  #   runs-on: ubuntu-latest
+  #   steps:
+
+  #     - name: timeout
+  #       run: sleep 30
+
+  #     - name: download artifact
+  #       uses: actions/download-artifact@v4
+  #       with:
+  #         name: conf
+
+  #     - name: display result
+  #       run: docker login containerregistrypocitt.azurecr.io -u containerRegistryPocITT -p $(sed 's/\"//g' conf.txt)
+      
+
+  first_build_base_image:
     needs: poc_initialization
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
 
-      - name: timeout
+      - name: wait the creation of resources
         run: sleep 30
 
       - name: download artifact
@@ -63,48 +81,24 @@ jobs:
         with:
           name: conf
 
-      - name: display
-        run: cat conf.txt
+      - name: Login to azure container registry
+        run: 
+          docker login containerregistrypocitt.azurecr.io -u containerRegistryPocITT -p $(sed 's/\"//g' conf.txt)
 
-      - name: display result
-        run: docker login containerregistrypocitt.azurecr.io -u containerRegistryPocITT -p $(sed 's/\"//g' conf.txt)
-
-          # cat conf.txt | docker login containerregistrypocitt.azurecr.io -u containerRegistryPocITT --password-stdin
-      
-
-  # first_build_base_image:
-  #   needs: poc_initialization
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - name: wait the creation of resources
-  #       run: sleep 30
-  #     - name: Login to azure container registry
-  #       env: 
-  #         registry_token: ${{  needs.poc_initialization.outputs.token  }}
-  #       run: |
-  #         echo $registry_token
-
-  #     - name: Login to azure container registry
-  #       env: 
-  #         registry_token: ${{  needs.poc_initialization.outputs.token  }}
-  #       run: 
-  #         docker login containerregistrypocitt.azurecr.io -u containerRegistryPocITT -p $registry_token
-
-  #     - name: Create env file
-  #       working-directory: ./containerization/image-build
-  #       env:
-  #         MONGO_URI: ${{  secrets.MONGO_URI  }}
-  #         HOST_URL: ${{  secrets.HOST_URL  }}
-  #       run: |
-  #         touch .env
-  #         echo MONGO_URI=$MONGO_URI >> .env
-  #         echo HOST_URL=$HOST_URL >> .env
-  #     - name: build & add first app image to container our registry
-  #       working-directory: ./containerization/image-build
-  #       run: docker build . --tag containerRegistryPocITT/app-user:1.0
-  #     - name: Push images
-  #       run: docker push containerRegistryPocITT/app-user:1.0
+      - name: Create env file
+        working-directory: ./containerization/image-build
+        env:
+          MONGO_URI: ${{  secrets.MONGO_URI  }}
+          HOST_URL: ${{  secrets.HOST_URL  }}
+        run: |
+          touch .env
+          echo MONGO_URI=$MONGO_URI >> .env
+          echo HOST_URL=$HOST_URL >> .env
+      - name: build & add first app image to container our registry
+        working-directory: ./containerization/image-build
+        run: docker build . --tag containerRegistryPocITT/app-user:1.0
+      - name: Push images
+        run: docker push containerRegistryPocITT/app-user:1.0
 
   # deploy:
   #   needs: [poc_initialization, first_build_base_image]
