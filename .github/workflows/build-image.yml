@@ -15,7 +15,7 @@ jobs:
     - name: Login to docker registry
       env: 
         registry_token: ${{ secrets.REGISTRY_TOKEN }}
-      run: docker login -u martinmouly -p $registry_token
+      run: docker login -u containerregistrypocitt -p $registry_token
     - name: Create env file
       working-directory: ./containerization/image-build
       env:
@@ -27,7 +27,6 @@ jobs:
         echo HOST_URL=$HOST_URL >> .env
     - name: Build docker image
       working-directory: ./containerization/image-build
-      run: docker build . --tag martinmouly/poc-devops-itt:${{  github.event.inputs.version  }}
+      run: docker build . --tag containerregistrypocitt.azurecr.io/app-user:${{  github.event.inputs.version  }}
     - name: Push images
-      run: docker push martinmouly/poc-devops-itt:${{  github.event.inputs.version  }}
-
+      run: docker push containerregistrypocitt.azurecr.io/app-user:${{  github.event.inputs.version  }}
