@@ -1,4 +1,4 @@
-name: POC initialization
+name: initialization
 
 on:
     workflow_dispatch:

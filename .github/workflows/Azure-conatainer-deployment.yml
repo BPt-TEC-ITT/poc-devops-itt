@@ -10,11 +10,12 @@ on:
         options:
           - prod
           - test
-          - all
+        default: test
         required: true
       version:
         description: 'application version'
         required: true
+        default: latest
 
 env:
   ARM_CLIENT_SECRET: ${{  secrets.ARM_CLIENT_SECRET  }}
@@ -46,16 +47,6 @@ jobs:
     - name: Initialize Terraform
       working-directory: ./containerization/infrastructure/deploy-container
       run: terraform init
-
-    - name: Try terraform plan on ALL
-      if: ${{ github.event.inputs.env == 'all' }}
-      working-directory: ./containerization/infrastructure/deploy-container
-      run: terraform plan -var application_version=${{ github.event.inputs.version }}
-
-    - name: Deployment on ALL env
-      if: ${{ github.event.inputs.env  == 'all' }}
-      working-directory: ./containerization/infrastructure/deploy-container
-      run: terraform apply -var application_version=${{ github.event.inputs.version }} -auto-approve
 
     - name: Try terraform plan on PROD env
       if: ${{ github.event.inputs.env  == 'prod' }}
