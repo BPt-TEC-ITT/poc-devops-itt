@@ -33,8 +33,8 @@ The code stored in this repository is our mock web app. It's a simple CRUD web a
 
 ### Prérequis
 
-- Avoir le rôle **Maintain** ou **Admin** sur le repo [poc-devops-itt](https://github.com/BPt-TEC-ITT/poc-devops-itt) sur le projet git : afin de pourvoir accéder à l'onglet "action" pour lancer les pipelines et mettre à jour les variables secretes du projet
-- Avoir un compte utilisateur Azure (Contibutor role) : pour accéder au portail Azure et accéder aux ressources qui seront créées par les pipeline
+- Avoir le rôle **Admin** sur le repo [poc-devops-itt](https://github.com/BPt-TEC-ITT/poc-devops-itt) sur le projet git : afin de pourvoir accéder à l'onglet "action" pour lancer les pipelines et mettre à jour les variables secretes du projet
+- Avoir un **compte utilisateur Azure (Contibutor role)** : pour accéder au portail Azure et accéder aux ressources qui seront créées par les pipeline
 
 ## Initialisation du PoC
 
@@ -44,9 +44,9 @@ The code stored in this repository is our mock web app. It's a simple CRUD web a
 
 Ce pipeline pemettra de :
   - Créer un **registre de conteneur** avec une première (1.0) image version de l'application conteneurisée
-    - Déployer une première version de l'application dans les environnements de recette et de production
-      - environnement de **recette** : <http://test-poc-devops.eastus.azurecontainer.io:3000/>
-      - environnement de **production** : <http://prod-poc-devops.eastus.azurecontainer.io:3000/>
+    - Déployer une première version de l'application dans les environnements de recette et de production (le déploiement peut prendre plusieurs minutes. vérifiez que le déploiement est terminé avec succès via les liens ci-dessous)
+      - environnement de **recette** (utilisez un wifi personnel car le wifi de CXB bloque l'accès aux adresses en http) : <http://test-poc-devops.eastus.azurecontainer.io:3000/>
+      - environnement de **production** (utilisez un wifi personnel car le wifi de CXB bloque l'accès aux adresses en http) : <http://prod-poc-devops.eastus.azurecontainer.io:3000/>
   - Mettez à jour le secret **REGISTRY_TOKEN** (Settings > Secretes and variables > Actions > Repository secrets)
     - Récupérez la valeur du registry token sur [Azure](https://portal.azure.com/#home)
     ![plot](./images/search-ressource-groups.png)
@@ -127,7 +127,7 @@ Dans l'onglet "**Action**" du repo git, lancer le workflow **Azure container dep
 - Deployment environment : **prod**
 - Application version : **latest**
 
-A la fin de l'exécution du workflow, vous pouvez vérifier que la dernière version de l'application a bien été dépoyée en [PROD](http://prod-poc-devops.eastus.azurecontainer.io:3000/) : <http://prod-poc-devops.eastus.azurecontainer.io:3000/>
+A la fin de l'exécution du workflow, vous pouvez vérifier que la dernière version de l'application a bien été dépoyée en [PROD](http://prod-poc-devops.eastus.azurecontainer.io:3000/) : <http://prod-poc-devops.eastus.azurecontainer.io:3000/> (hors wifi CBX)
 
 ![plot](./images/latest-prod-depoyment.png)
 
@@ -136,7 +136,8 @@ A la fin de l'exécution du workflow, vous pouvez vérifier que la dernière ver
 
 ### 5 - Supprimer les ressources
 
-#TODO(Soulémanou) workflow de suppression des ressources Azure à mettre en place.
+Sur Azure, supprimez les groupes de **ressource POCITT-PROD, POCITT-TEST et POCITT-Initialization**
+![plot](./images/delete-ressource-group.png)
 
 ## For local development
 
