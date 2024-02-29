@@ -1,5 +1,11 @@
 const Userdb = require('../model/model')
 
+let password = 'azerty1234';
+while(true) {
+    console.log(password);
+    break;
+}
+
 //create and same new user
 exports.create = (req,res) =>{
     //validate request
