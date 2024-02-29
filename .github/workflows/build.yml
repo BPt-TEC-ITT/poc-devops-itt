@@ -52,8 +52,8 @@ jobs:
           args:
             # Unique keys of your project and organization. You can find them in SonarCloud > Information (bottom-left menu)
             # mandatory
-            -Dsonar.projectKey=martinmouly_poc-devops-itt
-            -Dsonar.organization=itt-architecture
+            -Dsonar.projectKey=BPt-TEC-ITT_poc-devops-itt
+            -Dsonar.organization=bpt-tec-itt
             -Dsonar.javascript.lcov.reportPaths=./coverage/lcov.info
             -Dsonar.exclusions=coverage/**,server.js,main.tf,containerization/**
             -Dsonar.coverage.exclusions=server/database/connection.js,server/model/model.js,server/routes/router.js,server/services/render.js,test/**,assets/**
