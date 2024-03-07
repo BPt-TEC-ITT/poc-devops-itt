@@ -10,17 +10,15 @@
 
 [![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=BPt-TEC-ITT_poc-devops-itt)](https://sonarcloud.io/summary/new_code?id=BPt-TEC-ITT_poc-devops-itt)
 
-## Super DevOps Color Quest 🌈🚀
+## DevOps Quest 🌈🚀
 
-🆘 Le Royaume Azure est en danger ! Bowser Bugs (🐢🔥😈) réclame une **nouvelle couleur pour son royaume, et il la veut pour hier** sinon le royaume champignon sera détruit ! En tant que **Super DevOps Bros**, utilisez GitHub, Terraform, et la magie d'Azure pour déployer la teinte parfaite en un temps record !
-
-Créez une forteresse DevOps avec Terraform, codez des sorts avec GitHub, puis déployez la nouvelle version l'application avec la nouvelle couleur préférée de Bowser. Évitez les Goombas (🍄😠) de **dépoiement automatique**, sautez les Koopa Troopa (🐢🔴) de **Tests**, et libérez la Princesse (👑🍑) **Repository**. Les **Super DevOps Bros** sont le dernier espoir du royaume champignon pour un déploiement rapide et stylé ! 🌐🎨🚀
+🆘 Le Royaume Azure est en danger ! Bowser réclame une **nouvelle couleur pour son royaume, et il la veut pour hier** ! En tant que **Super DevOps Bros**, utilisez GitHub, Terraform, et la magie d'Azure pour déployer la teinte parfaite en un temps record !
 
 Bonne chance, héros DevOps ! 🍄✨
 
 ## #1. Préparation du terrain
 
-**I. 🚀Lancement du super pipeline d'initialisation :**
+**I. 🚀Lancement pipeline d'initialisation :**
 
 La première étape consiste à activer le super pipeline d'initialisation 🕹️ qui permettra de :
 
@@ -38,9 +36,10 @@ L'initialisation peut prendre quelques minutes, vérifiez bien le succès du dé
 - **Environnement de test** (utilisez un réseau personnel, le réseau de CBX peut restreindre l'accès) : [http://test-poc-devops.eastus.azurecontainer.io:3000/](http://test-poc-devops.eastus.azurecontainer.io:3000/)
 - **Environnement de production** (utilisez un réseau personnel, le réseau de CBX peut restreindre l'accès) : [http://prod-poc-devops.eastus.azurecontainer.io:3000/](http://prod-poc-devops.eastus.azurecontainer.io:3000/)
 
-🚨 Le lancement du super pipeline d'initialisation a généré un nouveau mot de passe. Il est temps de mettre à jour le secret **REGISTRY_TOKEN**.
 
 **II.🔍 Récupération du mot de passe sur Azure :**
+
+🚨 Le lancement du super pipeline d'initialisation a généré un nouveau mot de passe. Il est temps de mettre à jour le secret **REGISTRY_TOKEN**.
 
 **1. Allez sur le portail [Azure](https://portal.azure.com/#home)**
 
@@ -66,9 +65,15 @@ Les préparatifs sont maintenant terminé !
 
 ## #2. La mission 🎯
 
-Vous êtes face à un défi passionnant : changer la couleur de l'en-tête du site web selon les préférences de Bowser Bugs (🐢🔥😈) pour sauver le royaume champignon. Nous vous guiderons à travers ce défi en 5 étapes clés : **PLAN, CODE, BUILD, TEST, et DEPLOY**.
+Vous êtes face à un défi passionnant : changer la couleur de l'en-tête du site web selon les préférences de Bowser. Nous vous guiderons à travers ce défi en 5 étapes clés :
 
-1. **PLAN 📝**
+- **PLAN** : Planifier les changements/développements qui vont être effectués (Dashboard github)
+- **CODE** : écrire le code
+- **BUILD** : Construire une nouvelle version de l'application prennant en compte les modifications/développements effecttués
+- **TEST** : Test automatisés (qualité de code)
+- **DEPLOY** : Déploiement de la nouvelle version de l'application en environnement de production et de test.
+
+1. **PLAN**
 
 - Un ticket vous a été attribué sur le tableau de projet : [Tableau de projet](https://github.com/orgs/BPt-TEC-ITT/projects/1/views/1)
 - **Prenez en main ce ticket et montrez votre engagement en le déplaçant dans la colonne 'En cours'**. C'est le début de notre voyage pour découvrir les outils de planification et suivi de projet.
