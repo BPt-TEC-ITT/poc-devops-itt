@@ -115,14 +115,18 @@ Le détail du scan sera disponible [ici](https://sonarcloud.io/project/pull_requ
 ![image](https://github.com/BPt-TEC-ITT/poc-devops-itt/assets/19230666/3a3628d0-42f9-4170-b687-bfb504f435a5)
 
 4. **DEPLOY 🚀**
-A cette étape, nous allons déployer la nouvelle version de l'application (prennant en compte les modifications) dans les environnement de Test et de Production.
+A cette étape, nous allons déployer la nouvelle version de l'application (prennant en compte les modifications) sur les environnements de Test et de Production.
 
 - **Déploiement sur l'environnement de Test** : Il se fait automatiquement lorsqu'un pull request est mergé sur le branche principale (v1.0/main). Accédez à [l'environnement de TEST](http://test-poc-devops.eastus.azurecontainer.io:3000/) pour vérifier que les dernières modifications ont bien été déployées.
 
-- **Dépoiemement en environnement de Production**
-Maintenant qu'on s'est rassurés que les modification déployées en environnement de test correspondent à nos attentes, nous allons dépoyer en production
-  - lancez xx
-Déploiement en test puis en production : ces étapes finalisent le déploiement de notre application dans les différents environnements. Le déploiement se fait automatiquement après avoir fusionné une pull request sur la branche principale.
+- **Déploiemement en environnement de Production**
+Maintenant qu'on s'est rassurés que les modifications déployées en environnement de test correspondent à nos attentes, nous allons dépoyer en production
+  - Dans l'ongets "Action", lancez le pipeline "Azure container deployment" avec les paramètres ci-dessous :
+    - Deployment environment : prod
+    - Application version : latest
+![prod-deployment](./images/prod-deployment.png)
+  
+  Une fois l'exécution du pipeline terminé, accédez à [l'environnement de Production](http://prod-poc-devops.eastus.azurecontainer.io:3000/) pour vérifier que les modifications ont été correctement appliquées.
 
 ## #3 - Nettoyage final ✨
 
@@ -130,4 +134,4 @@ Avant de clore notre aventure, n'oubliez pas de nettoyer derrière vous en suppr
 
 Pour les développeurs souhaitant expérimenter localement, suivez les instructions pour démarrer le projet dans votre environnement local.
 
-Merci d'avoir participé à cette aventure **PoC DevOps** 🚀
+Merci d'avoir participé à cette aventure **Azure DevOps Color Quest 🚀**.
