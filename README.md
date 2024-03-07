@@ -18,7 +18,7 @@ Créez une forteresse DevOps avec Terraform, codez des sorts avec GitHub, puis d
 
 Bonne chance, héros DevOps ! 🍄✨
 
-## Préparation du terrain
+## #1. Préparation du terrain
 
 **I. 🚀Lancement du super pipeline d'initialisation :**
 
@@ -64,7 +64,7 @@ Les préparatifs sont maintenant terminé !
 - *L'initialisation peut prendre jusqu'à 5 minutes. Vérifiez que toutes les ressources sont correctement créées sur Azure. Si l'initialisation échoue, supprimez les ressources concernées sur Azure et relancez le pipeline.*
 - *Si la section security n'est pas visible => vous n'avez pas les droits suffisants. Assurez vous d'avoir les droits Admin ou Owner sur le reposiroty*
 
-## #1. Début de la mission 🎯
+## #2. La mission 🎯
 
 Vous êtes face à un défi passionnant : changer la couleur de l'en-tête du site web selon les préférences de Bowser Bugs (🐢🔥😈) pour sauver le royaume champignon. Nous vous guiderons à travers ce défi en 5 étapes clés : **PLAN, CODE, BUILD, TEST, et DEPLOY**.
 
@@ -128,10 +128,44 @@ Maintenant qu'on s'est rassurés que les modifications déployées en environnem
   
   Une fois l'exécution du pipeline terminé, accédez à [l'environnement de Production](http://prod-poc-devops.eastus.azurecontainer.io:3000/) pour vérifier que les modifications ont été correctement appliquées.
 
-## #3 - Nettoyage final ✨
+🎉🥳 **Bonne nouvelle ! Bowser Bug est conquis par la nouvelle version de l'application déployée en Production. Ouf !** 🎉🥳
 
-Avant de clore notre aventure, n'oubliez pas de nettoyer derrière vous en supprimant les ressources Azure pour éviter des frais inutiles.
+## #3. Nettoyage final ✨
 
-Pour les développeurs souhaitant expérimenter localement, suivez les instructions pour démarrer le projet dans votre environnement local.
+Avant de clore notre aventure, n'oubliez pas de nettoyer derrière vous en supprimant les groupes de ressources Azure pour éviter des frais inutiles.
 
-Merci d'avoir participé à cette aventure **Azure DevOps Color Quest 🚀**.
+Pour les développeurs souhaitant expérimenter localement, suivez les instructions dans la section "For local development" pour démarrer le projet dans votre environnement local.
+
+![clean](./images/delete-ressource-group.png)
+
+## Générique de fin 🎬
+
+🌟 Bravo à vous, intrépides héros du Royaume DevOps, pour avoir mené à bien chaque étape de cette quête ! Vous avez une fois de plus sauvé le royaume !🌟
+
+🏆 Continuez à embrasser les défis technologiques avec la même détermination, et rappelez-vous toujours que le ciel du Royaume DevOps est la limite! Merci pour votre engagement et votre excellence 🏆
+
+Prenez un moment pour célébrer votre réussite, car vous êtes désormais des champions certifiés du DevOps Mario Adventure! 🎉🍄✨
+
+À la prochaine aventure DevOps! 🚀🎮
+
+## For local development
+
+If you want to use this project to demonstrate DevOps tools and best-practices, or if you simply want to participate in the project's maintenance, you might need to start the project in a local environment.
+To start the project in a local environment : 
+
+- Create a .env file in the root folder and add these 2 variables :
+  ```
+  MONGO_URI="<mongo_uri>"
+  HOST_URL="http://localhost:3000"
+  ```
+  Ask Martin Mouly or Soulemanou Ngbango for the MONGO_URI variable. It containes the credentials to connect to the MongoDB database.
+
+- Once you've added the .env file, you're good to go, simply run these 2 commands to build the project and start the local server :
+  ```
+  npm install
+  ```
+  ```
+  npm start
+  ```
+
+Finally, go to <http://localhost:3000> to visualize the app.
