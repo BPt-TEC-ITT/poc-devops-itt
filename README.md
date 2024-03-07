@@ -14,7 +14,7 @@
 
 🆘 Le Royaume Azure est en danger ! Bowser Bugs (🐢🔥😈) réclame une **nouvelle couleur pour son royaume, et il la veut pour hier** sinon le royaume champignon sera détruit ! En tant que **Super DevOps Bros**, utilisez GitHub, Terraform, et la magie d'Azure pour déployer la teinte parfaite en un temps record !
 
-Créez une forteresse DevOps avec Terraform, codez des sorts avec GitHub, puis déployez la nouvelle version l'application avec la nouvelle couleur préférée de Bowser. Évitez les Goombas (🍄😠) de **dépoiement automatique**, sautez les Koopa Troopa (🐢🔴) de **Tests**, et libérez la Princesse (👑🍑) **Repository**. Les **Super DevOps Bros** sont le dernier espoir d'Azure pour un déploiement rapide et stylé ! 🌐🎨🚀
+Créez une forteresse DevOps avec Terraform, codez des sorts avec GitHub, puis déployez la nouvelle version l'application avec la nouvelle couleur préférée de Bowser. Évitez les Goombas (🍄😠) de **dépoiement automatique**, sautez les Koopa Troopa (🐢🔴) de **Tests**, et libérez la Princesse (👑🍑) **Repository**. Les **Super DevOps Bros** sont le dernier espoir du royaume champignon pour un déploiement rapide et stylé ! 🌐🎨🚀
 
 Bonne chance, héros DevOps ! 🍄✨
 
@@ -117,11 +117,11 @@ Le détail du scan sera disponible [ici](https://sonarcloud.io/project/pull_requ
 4. **DEPLOY 🚀**
 A cette étape, nous allons déployer la nouvelle version de l'application (prennant en compte les modifications) sur les environnements de Test et de Production.
 
-- **Déploiement sur l'environnement de Test** : Il se fait automatiquement lorsqu'un pull request est mergé sur le branche principale (v1.0/main). Accédez à [l'environnement de TEST](http://test-poc-devops.eastus.azurecontainer.io:3000/) pour vérifier que les dernières modifications ont bien été déployées.
+- **Déploiement sur l'environnement de Test** : Il se fait automatiquement lorsqu'une pull request est mergée sur la branche principale (v1.0/main). Accédez à [l'environnement de TEST](http://test-poc-devops.eastus.azurecontainer.io:3000/) pour vérifier que les dernières modifications ont bien été déployées.
 
 - **Déploiemement en environnement de Production**
-Maintenant qu'on s'est rassurés que les modifications déployées en environnement de test correspondent à nos attentes, nous allons dépoyer en production
-  - Dans l'ongets "Action", lancez le pipeline "Azure container deployment" avec les paramètres ci-dessous :
+Maintenant qu'on s'est rassurés que les modifications déployées en environnement de test correspondent à nos attentes, nous allons dépoyer en production.
+  - Dans l'onget "Action", lancez le pipeline "Azure container deployment" avec les paramètres ci-dessous :
     - Deployment environment : prod
     - Application version : latest
 ![prod-deployment](./images/prod-deployment.png)
@@ -134,9 +134,9 @@ Maintenant qu'on s'est rassurés que les modifications déployées en environnem
 
 Avant de clore notre aventure, n'oubliez pas de nettoyer derrière vous en supprimant les groupes de ressources Azure pour éviter des frais inutiles.
 
-Pour les développeurs souhaitant expérimenter localement, suivez les instructions dans la section "For local development" pour démarrer le projet dans votre environnement local.
-
 ![clean](./images/delete-ressource-group.png)
+
+Pour les développeurs souhaitant expérimenter localement, suivez les instructions dans la section "For local development" pour démarrer le projet dans votre environnement local.
 
 ## Générique de fin 🎬
 
@@ -151,7 +151,7 @@ Prenez un moment pour célébrer votre réussite, car vous êtes désormais des 
 ## For local development
 
 If you want to use this project to demonstrate DevOps tools and best-practices, or if you simply want to participate in the project's maintenance, you might need to start the project in a local environment.
-To start the project in a local environment : 
+To start the project in a local environment :
 
 - Create a .env file in the root folder and add these 2 variables :
   ```
