@@ -19,9 +19,11 @@
 
 ## Azure DevOps Color Quest 🌈🚀
 
-🆘 Le Royaume Azure est en danger ! Bowser Bugs (🐢🔥😈) réclame une **nouvelle couleur pour son royaume, et il la veut pour hier** ! En tant que Super DevOps Bros, utilisez GitHub, Terraform, et la magie d'Azure pour déployer la teinte parfaite en un temps record !
+🆘 Le Royaume Azure est en danger ! Bowser Bugs (🐢🔥😈) réclame une **nouvelle couleur pour son royaume, et il la veut pour hier** sinon le royaume champignon sera détruit ! En tant que **Super DevOps Bros**, utilisez GitHub, Terraform, et la magie d'Azure pour déployer la teinte parfaite en un temps record !
 
-Créez une forteresse DevOps avec Terraform, codez des sorts avec GitHub, puis déployez la nouvelle version l'application avec la nouvelle couleur préférée de Bowser. Évitez les Goombas (🍄😠) de dépoiment automatique, sautez les Koopa Troopa (🐢🔴) de Tests, et libérez la Princesse (👑🍑) Repository. Les Super DevOps Bros sont le dernier espoir d'Azure pour un déploiement rapide et stylé ! 🌐🎨🚀
+Créez une forteresse DevOps avec Terraform, codez des sorts avec GitHub, puis déployez la nouvelle version l'application avec la nouvelle couleur préférée de Bowser. Évitez les Goombas (🍄😠) de **dépoiement automatique**, sautez les Koopa Troopa (🐢🔴) de **Tests**, et libérez la Princesse (👑🍑) **Repository**. Les **Super DevOps Bros** sont le dernier espoir d'Azure pour un déploiement rapide et stylé ! 🌐🎨🚀
+
+Bonne chance, héros DevOps ! 🍄✨
 
 ## Préparation du terrain 
 
@@ -46,17 +48,29 @@ L'initialisation peut prendre quelques minutes, vérifiez bien le succès du dé
 🚨 Le lancement du super pipeline d'initialisation a généré un nouveau mot de passe. Il est temps de mettre à jour le secret **REGISTRY_TOKEN**.
 
 🔍 **Récupération du mot de passe sur Azure :**
-1. Allez sur le portail Azure.
-2. Cherchez "Groupes de ressources".
-3. Ouvrez la ressource POCITT-Initialization.
-4. Dans "containerregistrypocitt", copiez le mot de passe depuis "Clés d'accès".
-5. Retournez sur GitHub pour mettre à jour le secret REGISTRY_TOKEN.
 
-**TODO Ajouter les captures !**
+**1. Allez sur le portail [Azure](https://portal.azure.com/#home)**
 
-Les instances Azure sont maintenant prêtes à être utilisées dans notre PoC depuis GitHub.
+**2. Cherchez "Groupes de ressources".**
+![find-ressource-groups](./images/search-ressource-groups.png)
 
-*Remarque : L'initialisation peut prendre jusqu'à 5 minutes. Vérifiez que toutes les ressources sont correctement créées sur Azure. Si l'initialisation échoue, supprimez les ressources concernées sur Azure et relancez le pipeline.*
+**3. Ouvrez la ressource POCITT-Initialization.**
+![select-registry](./images/select-container-registry.png)
+
+**4. Dans "containerregistrypocitt", copiez le mot de passe depuis "Clés d'accès".**
+![copy-password](./images/copy-pass.png)
+
+
+**5. Retournez sur GitHub pour mettre à jour le secret REGISTRY_TOKEN.**
+![update-registry-token](./images/update-registry-token.png)
+![paste-registry-token](./images/paste-registry-token.png)
+
+Les préparatifs sont maintenant terminés.
+
+*Remarques :*
+
+- *L'initialisation peut prendre jusqu'à 5 minutes. Vérifiez que toutes les ressources sont correctement créées sur Azure. Si l'initialisation échoue, supprimez les ressources concernées sur Azure et relancez le pipeline.*
+- *Si la section security n'est pas visible => vous n'avez pas les droits suffisants. Assurez vous d'avoir les droits Admin ou Owner sur le reposiroty*
 
 ## #2. Le PoC 🎯
 
