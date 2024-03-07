@@ -75,30 +75,54 @@ Vous êtes face à un défi passionnant : changer la couleur de l'en-tête du si
 
 2. **CODE, BUILD, TEST 🔧**
 
-Maintenant, place à l'action. Le but est simple : modifier l'apparence du site.
+Maintenant, place à l'action. Le but est simple : modifier l'apparence de l'application directement sur github ou en local.
 
 - *Directement sur GitHub* : appliquez vos modifications directement dans le fichier de style.
   1. **Ouvrez et modifiez le fichier assets/css/index.css et modifier la ligne 71 (choisir une nouvelle couleur)**
   2. **Ouvrez une Pull Request,  ce qui lancera un pipeline de buid + test.**
   3. **Faire passer le ticket dans la colonne "Sent for PR" dans le dashboard.**
+  4. **Après vos modifications, créez une pull request pour lancer le processus de vérification**. Si tout est correct, vous pouvez fusionner vos changements.
       - Si le pipeline fail, le bouton pour merger sera rouge (Ne pas merger)
       - Si le pipeline se déroule correctement, la branche peut être mergée.
 
+ Ci-dessous, un exemple de Pull Request:
+ ![image](https://github.com/BPt-TEC-ITT/poc-devops-itt/assets/19230666/40a216a0-656b-4064-8422-941ef8d19600)
+
 - *En local* : (voir section *For local developement* en bas de page).
 
-- Après vos modifications, créez une pull request pour lancer le processus de vérification. Si tout est correct, vous pouvez fusionner vos changements.
+*Bonnes pratiques :*
 
-*Il est recommendé de :*
-
-- *Faire les développement en local plutôt que sur github permet de ...*
+- *Faire les développement en local après avoir cloné le repository plutôt que de faire les développements directement sur github*
 - *Valider les pull requests par d'autres membres de l'équipe de développement avant de les merger*
 
 3. **TEST : SCAN SONAR 🔍**
-   - Pour illustrer l'importance du test, incluons délibérément un problème dans notre code. Ceci démontrera l'utilité d'un outil comme Sonar pour repérer les vulnérabilités et les bugs.
-   - Créez une nouvelle branche et ajoutez du code problématique. La création d'une pull request déclenchera un scan Sonar, révélant les vulnérabilités.
+
+Pour illustrer l'importance des tests, incluons délibérément un problème dans notre code. Ceci démontrera l'utilité d'un outil comme Sonar pour repérer les vulnérabilités et les bugs.
+
+- **Créez une nouvelle branche et ajoutez le bout de code ci-dessous dans le fichier server/controller/controller.js.**
+
+```
+let password = 'azerty1234';
+while(true) {
+    console.log(password);
+    break;
+}
+```
+
+- **Créez ensuite une pull request**. Le code ajouté précédemment va être detecté par le scan Sonar comme une vulnérabilité car il affiche un password en clair, ainsi qu'un bug car la boucle while est inutile.
+Le détail du scan sera disponible [ici](https://sonarcloud.io/project/pull_requests_list?id=BPt-TEC-ITT_poc-devops-itt) !
+
+![image](https://github.com/BPt-TEC-ITT/poc-devops-itt/assets/19230666/3a3628d0-42f9-4170-b687-bfb504f435a5)
 
 4. **DEPLOY 🚀**
-   - Déploiement en test puis en production : ces étapes finalisent le déploiement de notre application dans les différents environnements. Le déploiement se fait automatiquement après avoir fusionné une pull request sur la branche principale.
+A cette étape, nous allons déployer la nouvelle version de l'application (prennant en compte les modifications) dans les environnement de Test et de Production.
+
+- **Déploiement sur l'environnement de Test** : Il se fait automatiquement lorsqu'un pull request est mergé sur le branche principale (v1.0/main). Accédez à [l'environnement de TEST](http://test-poc-devops.eastus.azurecontainer.io:3000/) pour vérifier que les dernières modifications ont bien été déployées.
+
+- **Dépoiemement en environnement de Production**
+Maintenant qu'on s'est rassurés que les modification déployées en environnement de test correspondent à nos attentes, nous allons dépoyer en production
+  - lancez xx
+Déploiement en test puis en production : ces étapes finalisent le déploiement de notre application dans les différents environnements. Le déploiement se fait automatiquement après avoir fusionné une pull request sur la branche principale.
 
 ## #3 - Nettoyage final ✨
 
