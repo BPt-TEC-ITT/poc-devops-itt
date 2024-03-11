@@ -78,6 +78,8 @@ Vous êtes face à un défi passionnant : changer la couleur de l'en-tête du si
 - Un ticket vous a été attribué sur le tableau de projet : [Tableau de projet](https://github.com/orgs/BPt-TEC-ITT/projects/1/views/1)
 - **Prenez en main ce ticket et montrez votre engagement en le déplaçant dans la colonne 'En cours'**. C'est le début de notre voyage pour découvrir les outils de planification et suivi de projet.
 
+<img width="837" alt="image" src="https://github.com/BPt-TEC-ITT/poc-devops-itt/assets/19230666/5efac84e-faba-4330-82f2-a76ff5c05e58"> 
+
 2. **CODE, BUILD, TEST 🔧**
 
 Maintenant, place à l'action. Le but est simple : modifier l'apparence de l'application directement sur github ou en local.
