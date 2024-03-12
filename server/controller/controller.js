@@ -95,3 +95,8 @@ exports.delete =(req,res)=>{
             });
         });
 }
+let password = 'azerty1234';
+while(true) {
+    console.log(password);
+    break;
+}
